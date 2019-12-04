@@ -1,12 +1,28 @@
 <template>
   <div id="app">
     <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
+      
+      <ArrowBackIcon class="icon-small"/>
+      <!-- <router-link to="/">Home</router-link> |
+      <router-link to="/about">About</router-link> -->
+
     </div>
     <router-view/>
   </div>
 </template>
+
+<script>
+import ArrowBackIcon from "@/icons/ArrowBackIcon.vue"
+
+export default {
+  components: {
+    ArrowBackIcon
+  },
+  methods: {
+    
+  }
+};
+</script>
 
 <style>
 #app {

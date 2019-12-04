@@ -28,10 +28,21 @@ button {
 	padding: .375rem .75rem;
 	font-size: 1rem;
 	line-height: 1.5;
-	border-radius: 1rem;
+	border-radius: .4rem;
 	transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
 }
 
 button:not(:disabled):not(.disabled) {
 	cursor: pointer;
+}
+
+.icon-small {
+	width: 2rem;
+}
+
+input[type=text] {
+	padding: 0.75rem;
+	font-size: 1rem;
+	border-radius: 0.4rem;
+	border: 1px solid #ddd;
 }

@@ -7,7 +7,6 @@
       <div>
         <h2>You don't have any list</h2>
         <p>Create a list and add items to your trolley for a better shopping experience</p>
-        <button>Add List</button>
       </div>
     </div>
   </div>
