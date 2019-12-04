@@ -11,7 +11,7 @@
       <input type="text" placeholder="Enter your email address to start">
     </p>
     
-    <button>Start</button>
+    <button class="btn btn-large">Start</button>
     <ShoppingLists />
     <button @click="onAddList">Add List</button>
   </div>

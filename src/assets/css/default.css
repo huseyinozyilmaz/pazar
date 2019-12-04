@@ -16,28 +16,9 @@ h1 {
 h2 {
 	font-size: 1.75rem;
 }
-button {
-	color:#fff;
-	background-color: #007bff;
-	border-color: #007bff;
-	display: inline-block;
-	text-align: center;
-	white-space: nowrap;
-	vertical-align: middle;
-	border: 1px solid transparent;
-	padding: .375rem .75rem;
-	font-size: 1rem;
-	line-height: 1.5;
-	border-radius: .4rem;
-	transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
-}
 
-button:not(:disabled):not(.disabled) {
+.btn:not(:disabled):not(.disabled) {
 	cursor: pointer;
-}
-
-.icon-small {
-	width: 2rem;
 }
 
 input[type=text] {
@@ -45,4 +26,53 @@ input[type=text] {
 	font-size: 1rem;
 	border-radius: 0.4rem;
 	border: 1px solid #ddd;
+	outline: none;
+}
+
+input[type=text]:focus {
+	border:1px solid tomato;
+}
+
+.btn {
+	border: 1px solid transparent;
+	text-align: center;
+	white-space: nowrap;
+	vertical-align: middle;
+	background-color:white;
+	transition: all 0.2s ease 0s;
+	color: #333;
+	fill: #333;
+	padding: 14px 14px;
+	font-size: 1rem; 
+	cursor: pointer; 
+	border-radius: 50%;
+	outline: none;
+	box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+  }
+  
+.btn:hover {
+	background-color: tomato;
+	fill: #000;
+}
+
+.btn:active {
+	transform: translateY(2px);
+	fill: #fff;
+	color: #fff;
+}
+.btn > svg {
+	width: 1.5rem;
+	vertical-align: middle;
+}
+
+.btn-large {
+	border-radius: 0.5rem;
+	padding-left: 2rem;
+	padding-right: 2rem;
+	text-transform: uppercase;
+	font-size: 1rem;
+	line-height: 1.5;
+	letter-spacing: 2px;
+	font-weight: 500;
+	background-color: tomato;
 }
