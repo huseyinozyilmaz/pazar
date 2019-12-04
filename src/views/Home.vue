@@ -8,10 +8,10 @@
 
     <h4>Create and share your groceries shopping lists</h4>
     <p>
-      <input type="text" placeholder="Enter your email address to start">
+      <input type="text" placeholder="Enter your email address to start" v-model="email">
     </p>
     
-    <button class="btn btn-large">Start</button>
+    <button class="btn btn-large" @click="onAddList">Start</button>
     <ShoppingLists />
     <button @click="onAddList">Add List</button>
   </div>
@@ -26,9 +26,16 @@ export default {
   components: {
     ShoppingLists
   },
+  data() {
+    return {
+      email: 'email@huseyin.org'
+    }
+  },
   methods: {
     onAddList(){
-      this.$router.push({ name:'CreateList'})
+      //this.$router.push({ name:'CreateList'})
+      alert(btoa(this.email))
+      atob(this.email)
     }
   }
 };
