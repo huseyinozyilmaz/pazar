@@ -22,6 +22,11 @@ const routes = [
     path: '/create-list',
     name: 'CreateList',
     component: () => import(/* webpackChunkName: "about" */ '../views/CreateList.vue')
+  },
+  {
+    path: '/passcode',
+    name: 'passcode',
+    component: () => import(/* webpackChunkName: "about" */ '../views/Passcode.vue')
   }
 ]
 

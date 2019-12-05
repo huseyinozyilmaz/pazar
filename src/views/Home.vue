@@ -2,35 +2,35 @@
   <div class="home">
     <Welcome />
     <p>
-      <input type="text" placeholder="Enter your email address to start" v-model="email">
+      <input type="text" class="form-control" placeholder="Enter your email address to start" v-model="user">
     </p>
-    
-    <button class="btn btn-large" @click="onAddList">Start</button>
-    <ShoppingLists />
-    <button @click="onAddList">Add List</button>
+    <button class="btn btn-large" :disabled="!user" @click="onStartClick">Start</button>
   </div>
 </template>
 
 <script>
-import ShoppingLists from "@/components/ShoppingLists.vue";
 import Welcome from "@/components/Welcome.vue";
 
 export default {
   name: "home",
   components: {
-    ShoppingLists,
     Welcome
   },
-  data() {
-    return {
-      email: 'email@huseyin.org'
+  methods: {
+    onStartClick() {
+      if(this.user) {
+        this.$router.push({ name:'passcode'})
+      }
     }
   },
-  methods: {
-    onAddList(){
-      //this.$router.push({ name:'CreateList'})
-      alert(btoa(this.email))
-      atob(this.email)
+  computed: {
+    user: {
+      get () {
+        return this.$store.state.user
+      },
+      set (value) {
+        this.$store.commit('SET_USER', value)
+      }
     }
   }
 };

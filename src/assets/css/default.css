@@ -6,7 +6,14 @@ body {
 	font-weight: 300;
 	font-size: 16px;
 }
-
+#app {
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	text-align: center;
+	color: #2c3e50;
+	max-width: 600px;
+	margin: 0 auto;
+}
 h1, h2, h3, h4, h5 {
 	font-weight: 400;
 }
@@ -21,7 +28,7 @@ h2 {
 	cursor: pointer;
 }
 
-input[type=text] {
+input[type=text], input[type=password] {
 	padding: 0.75rem;
 	font-size: 1rem;
 	border-radius: 0.4rem;
@@ -29,8 +36,11 @@ input[type=text] {
 	outline: none;
 }
 
-input[type=text]:focus {
+input[type=text]:focus, input[type=password]:focus {
 	border:1px solid tomato;
+}
+.form-control {
+	display: inline-block;
 }
 
 .btn {
@@ -44,7 +54,6 @@ input[type=text]:focus {
 	fill: #333;
 	padding: 14px 14px;
 	font-size: 1rem; 
-	cursor: pointer; 
 	border-radius: 50%;
 	outline: none;
 	box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
@@ -70,9 +79,9 @@ input[type=text]:focus {
 	padding-left: 2rem;
 	padding-right: 2rem;
 	text-transform: uppercase;
-	font-size: 1rem;
-	line-height: 1.5;
+	font-size: .75rem;
+	line-height: 1;
 	letter-spacing: 2px;
-	font-weight: 500;
+	font-weight: 600;
 	background-color: tomato;
 }

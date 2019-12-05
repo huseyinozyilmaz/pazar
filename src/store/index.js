@@ -5,11 +5,18 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    user: atob(localStorage.getItem('u')) || null
+    user: localStorage.getItem('u') ? atob(localStorage.getItem('u')) : ''
   },
   mutations: {
+    SET_USER(state, user) {
+      state.user = user
+      localStorage.setItem('u', btoa(user))
+    }
   },
   actions: {
+    fetchUser(context) {
+      context.commit('SET_USER', localStorage.getItem('u'))
+    }
   },
   modules: {
   }
