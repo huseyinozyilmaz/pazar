@@ -1,9 +1,7 @@
 <template>
   <div id="app">
     <div id="nav">
-      <button class="btn">
-        <ArrowBackIcon/>
-      </button>
+      <button class="btn"><ArrowBackIcon/></button>
       <!-- <router-link to="/">Home</router-link> |
       <router-link to="/about">About</router-link> -->
 

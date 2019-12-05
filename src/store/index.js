@@ -5,6 +5,7 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
+    user: atob(localStorage.getItem('u')) || null
   },
   mutations: {
   },

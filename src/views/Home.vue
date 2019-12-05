@@ -1,12 +1,6 @@
 <template>
   <div class="home">
-    <p>
-      <img src="@/assets/img/logo.svg" alt="Pazar Logo" style="width:50%;">
-    </p>
-    
-    <img src="@/assets/img/pazar.png" alt="Pazar Logo" >
-
-    <h4>Create and share your groceries shopping lists</h4>
+    <Welcome />
     <p>
       <input type="text" placeholder="Enter your email address to start" v-model="email">
     </p>
@@ -18,13 +12,14 @@
 </template>
 
 <script>
-// @ is an alias to /src
 import ShoppingLists from "@/components/ShoppingLists.vue";
+import Welcome from "@/components/Welcome.vue";
 
 export default {
   name: "home",
   components: {
-    ShoppingLists
+    ShoppingLists,
+    Welcome
   },
   data() {
     return {
