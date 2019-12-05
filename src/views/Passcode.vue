@@ -21,8 +21,7 @@ export default {
       d1: '',
       d2: '',
       d3: '',
-      d4: '',
-      code: ''
+      d4: ''
     }
   },
   components: {
@@ -31,7 +30,8 @@ export default {
   methods: {
     onGoClicked() {
       if (this.d1 && this.d2 && this.d3 && this.d4) {
-        this.code = this.d1 + this.d2 + this.d3 + this.d4
+        this.$store.commit('SET_PIN', this.d1 + this.d2 + this.d3 + this.d4)
+        this.$router.push({ name:'shopping-lists'})
       }
     },
     isNumber: function(evt) {
@@ -43,7 +43,9 @@ export default {
       else if (charCode > 31 && (charCode < 48 || charCode > 57)) {
         evt.preventDefault();
       } else {
-        evt.target.nextElementSibling.focus()
+        if(evt.target.nextElementSibling) {
+          evt.target.nextElementSibling.focus()
+        }
         return true;
       }
     },
@@ -62,16 +64,6 @@ export default {
   },
   mounted() {
     this.$refs.d.focus();
-  },
-  computed: {
-    // user: {
-    //   get () {
-    //     return this.$store.state.user
-    //   },
-    //   set (value) {
-    //     this.$store.commit('SET_USER', value)
-    //   }
-    // }
   }
 };
 </script>

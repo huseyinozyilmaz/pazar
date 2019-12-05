@@ -27,6 +27,16 @@ const routes = [
     path: '/passcode',
     name: 'passcode',
     component: () => import(/* webpackChunkName: "about" */ '../views/Passcode.vue')
+  },
+  {
+    path: '/shopping-lists',
+    name: 'shopping-lists',
+    component: () => import(/* webpackChunkName: "about" */ '../views/ShoppingLists.vue')
+  },
+  {
+    path: '/create-shopping-list',
+    name: 'create-shopping-list',
+    component: () => import(/* webpackChunkName: "about" */ '../views/ShoppingLists.vue')
   }
 ]
 
