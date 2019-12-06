@@ -7,15 +7,18 @@
 
     </div>
     <router-view/>
+    <AppFooter/>
   </div>
 </template>
 
 <script>
 import ArrowBackIcon from "@/icons/ArrowBackIcon.vue"
+import AppFooter from "@/components/AppFooter.vue"
 
 export default {
   components: {
-    ArrowBackIcon
+    ArrowBackIcon,
+    AppFooter
   },
   methods: {
     onBackClicked() {
