@@ -1,0 +1,70 @@
+{
+  "sections": [
+    {
+      "id": "S01",
+      "title": "Fruit & Vegetables",
+      "image": "@/assests/img/shop/sections/fruits-vegetables.jpg",
+      "items": [
+        {
+          "id": "apple-royal-gala",
+          "name": "Riyal Gala Apple",
+          "options": [],
+          "image": "@/assests/img/shop/sections/royal-gala-apple.jpg"
+        },
+        {
+          "name": "Banana",
+          "options": [],
+          "image": "@/assests/img/shop/sections/banana.jpg"
+        }
+      ]
+    },
+    {
+      "id": "S02",
+      "title": "Dairy",
+      "image": "",
+      "items": []
+    },
+    {
+      "id": "S03",
+      "title": "Meat & Fish",
+      "image": "",
+      "items": []
+    },
+    {
+      "id": "S04",
+      "title": "Bakery",
+      "image": "",
+      "items": []
+    },
+    {
+      "id": "S05",
+      "title": "Frozen",
+      "image": "",
+      "items": []
+    },
+    {
+      "id": "S06",
+      "title": "Food Cupboard",
+      "image": "",
+      "items": []
+    },
+    {
+      "id": "S07",
+      "title": "Drinks",
+      "image": "",
+      "items": []
+    },
+    {
+      "id": "S08",
+      "title": "Household",
+      "image": "",
+      "items": []
+    },
+    {
+      "id": "S09",
+      "title": "Health & Beauty",
+      "image": "",
+      "items": []
+    }
+  ]
+}

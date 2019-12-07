@@ -1,13 +1,12 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <button v-if="!isHome" class="btn" @click="onBackClicked"><ArrowBackIcon/></button>
-      <!-- <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link> -->
-
+    <div id="nav" v-if="!isSignedIn">
+      <button class="btn" @click="onBackClicked"><ArrowBackIcon/></button>
     </div>
-    <router-view/>
-    <AppFooter/>
+    <section class="pages">
+      <router-view/>
+    </section>
+    <AppFooter v-if="isSignedIn"/>
   </div>
 </template>
 
@@ -28,6 +27,9 @@ export default {
   computed: {
     isHome() {
       return this.$route.name === 'home'
+    },
+    isSignedIn() {
+      return this.$route.name !== 'home' && this.$route.name !== 'passcode'
     }
   }
 };
@@ -42,5 +44,8 @@ export default {
 }
 #nav a.router-link-exact-active {
   color: #42b983;
+}
+.pages {
+  padding-bottom: 90px;
 }
 </style>
