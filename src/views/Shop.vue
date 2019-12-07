@@ -1,9 +1,11 @@
 <template>
   <div class="shop">
-    <h1>Shop</h1>
-    <img :src="selectedCategory.image" alt="Shop Category">
+    <div class="banner">
+      <img :src="selectedCategory.image" alt="Shop Category">
+      <h2>{{selectedCategory.title}}</h2>
+    </div>
     <header>
-      <span class="categories"><a href="http://iamsteve.me">Categories</a></span>
+      <span class="categories">Categories</span>
       <nav class="vertical-align-middle scroll">
         <a href="#" class="nav-item" v-for="c in categories" :key="c.id" @click="onCategoryClick(c)">{{c.title}}</a>
       </nav>
@@ -16,7 +18,9 @@ export default {
   data () {
     return {
       selectedCategory: {
-        image: ''
+        id: "S01",
+        title: "Fruit & Vegetables",
+        image: "/img/shop/sections/fruits-vegetables.jpg",
       }
     }
   },
@@ -37,9 +41,24 @@ export default {
 </script>
 
 <style scoped>
+.banner {
+  position: relative;
+  text-align: center;
+  color: white;
+}
+.banner h2 {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+img {
+  margin: 0;
+  width: 100%;
+}
 header {
+  margin: 0;
   background: #333;
-  border-radius: 3px;
 }
 header .categories {
   width: 25%;
@@ -52,7 +71,7 @@ header nav{
   border-right: 1px solid tomato;
   padding: 12px 24px 13px;
 }
-.categories a {
+.categories {
   font-weight: 700;
   color: tomato;
   text-decoration: none;

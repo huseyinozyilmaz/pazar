@@ -3,67 +3,73 @@
     {
       "id": "S01",
       "title": "Fruit & Vegetables",
-      "image": "@/assests/img/shop/sections/fruits-vegetables.jpg",
+      "image": "/img/shop/sections/fruits-vegetables.jpg",
       "items": [
         {
           "id": "apple-royal-gala",
           "name": "Riyal Gala Apple",
           "options": [],
-          "image": "@/assests/img/shop/sections/royal-gala-apple.jpg"
+          "image": "/img/shop/items/royal-gala-apple.jpg"
         },
         {
           "name": "Banana",
           "options": [],
-          "image": "@/assests/img/shop/sections/banana.jpg"
+          "image": "/img/shop/items/banana.jpg"
         }
       ]
     },
     {
       "id": "S02",
       "title": "Dairy",
-      "image": "",
+      "image": "/img/shop/sections/dairy.jpg",
       "items": []
     },
     {
       "id": "S03",
       "title": "Meat & Fish",
-      "image": "",
+      "image": "/img/shop/sections/meat-fish.jpg",
       "items": []
     },
     {
       "id": "S04",
       "title": "Bakery",
-      "image": "",
+      "image": "/img/shop/sections/bakery.jpg",
       "items": []
     },
     {
       "id": "S05",
-      "title": "Frozen",
-      "image": "",
+      "title": "Herbs & Spices",
+      "image": "/img/shop/sections/herbs-spices.jpg",
       "items": []
     },
     {
       "id": "S06",
-      "title": "Food Cupboard",
-      "image": "",
+      "title": "Frozen",
+      "image": "/img/shop/sections/frozen.jpg",
       "items": []
     },
     {
       "id": "S07",
-      "title": "Drinks",
-      "image": "",
+      "title": "Food Cupboard",
+      "image": "/img/shop/sections/food-cupboard.jpg",
       "items": []
     },
     {
       "id": "S08",
-      "title": "Household",
-      "image": "",
+      "title": "Drinks",
+      "image": "/img/shop/sections/drinks.jpg",
       "items": []
     },
     {
       "id": "S09",
+      "title": "Household",
+      "image": "/img/shop/sections/household.jpg",
+      "items": []
+    },
+    {
+      "id": "S10",
       "title": "Health & Beauty",
-      "image": "",
+      "image": "/img/shop/sections/health-beauty.jpg",
       "items": []
     }
   ]

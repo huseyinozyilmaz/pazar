@@ -40,6 +40,9 @@ export default new Vuex.Store({
   },
   getters: {
     shopCategories(state) {
+      if(!state.shop.sections) {
+        return []
+      }
       return state.shop.sections.map(item => {
         return (({ id, title, image }) => ({ id, title, image }))(item);
       })
