@@ -1,10 +1,11 @@
 <template>
   <div class="shop">
     <h1>Shop</h1>
+    <img :src="selectedCategory.image" alt="Shop Category">
     <header>
       <span class="categories"><a href="http://iamsteve.me">Categories</a></span>
       <nav class="vertical-align-middle scroll">
-        <a href="#" class="nav-item" v-for="c in categories" :key="c.id">{{c.title}}</a>
+        <a href="#" class="nav-item" v-for="c in categories" :key="c.id" @click="onCategoryClick(c)">{{c.title}}</a>
       </nav>
     </header>
   </div>
@@ -12,8 +13,17 @@
 
 <script>
 export default {
+  data () {
+    return {
+      selectedCategory: {
+        image: ''
+      }
+    }
+  },
   methods: {
-    
+    onCategoryClick(category) {
+      this.selectedCategory = category 
+    }
   },
   mounted() {
     this.$store.dispatch('fetchShop')
