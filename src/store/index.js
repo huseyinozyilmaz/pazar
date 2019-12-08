@@ -10,7 +10,8 @@ export default new Vuex.Store({
     pin: null,
     shoppingLists: [],
     status: 'Ready',
-    shop: {}
+    shop: {},
+    cart: []
   },
   mutations: {
     SET_USER(state, user) {
@@ -25,6 +26,9 @@ export default new Vuex.Store({
     },
     SET_SHOP(state, shop) {
       state.shop = shop
+    },
+    ADD_TO_CART(state, item) {
+      state.cart.push(item)
     }
   },
   actions: {
@@ -46,6 +50,11 @@ export default new Vuex.Store({
       return state.shop.sections.map(item => {
         return (({ id, title, image }) => ({ id, title, image }))(item);
       })
+    },
+    categoryItems: (state) => categoryId => {
+      if (!state.shop.sections) return []
+      let section = state.shop.sections.find(section => {return section.id == categoryId})
+      return section.items || []
     }
   },
   modules: {

@@ -10,10 +10,17 @@
         <a href="#" class="nav-item" v-for="c in categories" :key="c.id" @click="onCategoryClick(c)">{{c.title}}</a>
       </nav>
     </header>
+    <div class="category-items centered">
+      <section class="cards">
+        <ShoppingItem v-for="item in items" :key="item.id" :item="item"/>
+      </section>
+    </div>
   </div>
 </template>
 
 <script>
+import ShoppingItem from '@/components/ShoppingItem.vue'
+
 export default {
   data () {
     return {
@@ -24,9 +31,15 @@ export default {
       }
     }
   },
+  components: {
+    ShoppingItem
+  },
   methods: {
     onCategoryClick(category) {
       this.selectedCategory = category 
+    },
+    onItemAddedToCart(item) {
+      console.log(item.name)
     }
   },
   mounted() {
@@ -35,6 +48,9 @@ export default {
   computed: {
     categories() {
       return this.$store.getters.shopCategories;
+    },
+    items() {
+      return this.$store.getters.categoryItems(this.selectedCategory.id);
     }
   }
 };
@@ -45,6 +61,7 @@ export default {
   position: relative;
   text-align: center;
   color: white;
+  height: 250px;
 }
 .banner h2 {
   position: absolute;
@@ -54,7 +71,11 @@ export default {
 }
 img {
   margin: 0;
-  width: 100%;
+  max-height: auto;
+  max-width: 100%;
+  display: block;
+    height: 100%;
+    width: 100%;
 }
 header {
   margin: 0;
@@ -101,5 +122,14 @@ header nav{
 }
 .scroll::-webkit-scrollbar {
 	display: none; 
+}
+.category-items {
+  margin-bottom: 0px;
+}
+.cards {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  padding: 4px;
 }
 </style>

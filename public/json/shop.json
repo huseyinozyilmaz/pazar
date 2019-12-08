@@ -6,15 +6,49 @@
       "image": "/img/shop/sections/fruits-vegetables.jpg",
       "items": [
         {
-          "id": "apple-royal-gala",
-          "name": "Riyal Gala Apple",
-          "options": [],
+          "id": "apple-royal-gala", "name": "Royal Gala Apple",
+          "unit": { "name": "kg", "increment": 0.5, "value": 1},
           "image": "/img/shop/items/royal-gala-apple.jpg"
         },
         {
-          "name": "Banana",
-          "options": [],
+          "id": "banana", "name": "Banana",
+          "unit": { "name": "kg", "increment": 0.5, "value": 1},
           "image": "/img/shop/items/banana.jpg"
+        },
+        {
+          "id": "aubergine", "name": "Aubergine",
+          "unit": { "name": "", "increment": 1, "value": 1},
+          "image": "/img/shop/items/aubergine.jpeg"
+        },
+        {
+          "id": "apple-braeburn", "name": "Braeburn Apple",
+          "unit": { "name": "kg", "increment": 0.5, "value": 1},
+          "image": "/img/shop/items/braeburn-apple.jpg"
+        },
+        {
+          "id": "brocolli", "name": "Brocolli",
+          "unit": { "name": "", "increment": 1, "value": 1},
+          "image": "/img/shop/items/brocolli.jpeg"
+        },
+        {
+          "id": "brussels-sprouts", "name": "Brussels Sprouts",
+          "unit": { "name": "kg", "increment": 0.5, "value": 0.5},
+          "image": "/img/shop/items/brussels-sprouts.jpeg"
+        },
+        {
+          "id": "carrot", "name": "Carrot",
+          "unit": { "name": "kg", "increment": 0.5, "value": 1},
+          "image": "/img/shop/items/carrots.jpeg"
+        },
+        {
+          "id": "cauliflower", "name": "Cauliflower",
+          "unit": { "name": "", "increment": 1, "value": 1},
+          "image": "/img/shop/items/cauliflower.jpg"
+        },
+        {
+          "id": "celery", "name": "Celery",
+          "unit": { "name": "", "increment": 1, "value": 1},
+          "image": "/img/shop/items/celery.jpeg"
         }
       ]
     },
