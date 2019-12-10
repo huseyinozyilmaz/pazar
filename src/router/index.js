@@ -19,11 +19,6 @@ const routes = [
     component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
   },
   {
-    path: '/create-list',
-    name: 'CreateList',
-    component: () => import(/* webpackChunkName: "create-list" */ '../views/CreateList.vue')
-  },
-  {
     path: '/passcode',
     name: 'passcode',
     component: () => import(/* webpackChunkName: "passcode" */ '../views/Passcode.vue')
@@ -32,6 +27,11 @@ const routes = [
     path: '/shopping-lists',
     name: 'shopping-lists',
     component: () => import(/* webpackChunkName: "shopping-lists" */ '../views/ShoppingLists.vue')
+  },
+  {
+    path: '/new-shopping-list',
+    name: 'new-shopping-list',
+    component: () => import(/* webpackChunkName: "create-list" */ '../views/NewShoppingList.vue')
   },
   {
     path: '/create-shopping-list',
