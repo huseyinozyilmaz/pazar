@@ -9,7 +9,7 @@
     <div class="col">
       <router-link class="nav" :to="{ name: 'cart' }" :class="{ 'animated': animated}" @click.native="onCartClick">
         <CartIcon class="icon-medium"/>
-        <p>Cart</p>
+        <p>Cart<span class="badge" v-if="cartSize">{{cartSize}}</span></p>
       </router-link>
     </div>
     <div class="col">
@@ -57,9 +57,14 @@ export default {
       if (mutation.type === 'ADD_TO_CART') {
         var self = this;
         self.animated = true;
-        setTimeout(function(){ self.animated = false; }, 1000);
+        setTimeout(function(){ self.animated = false; }, 500);
       }
     })
+  },
+  computed: {
+    cartSize() {
+      return this.$store.getters.cart.length
+    }
   }
 };
 </script>
@@ -84,6 +89,13 @@ export default {
 .nav:hover {
   color: #333;
   fill: #333;
+}
+.badge {
+  position: relative;
+  top: -20px;
+  right: 34px;
+  color: tomato;
+  font-weight: bold;
 }
 .animated{
   animation: shake 0.82s cubic-bezier(.36,.07,.19,.97) both;

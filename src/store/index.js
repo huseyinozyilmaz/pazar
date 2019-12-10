@@ -28,7 +28,18 @@ export default new Vuex.Store({
       state.shop = shop
     },
     ADD_TO_CART(state, item) {
-      state.cart.push(item)
+      let foundItem = state.cart.find(i => i.id === item.id)
+      if (foundItem) {
+        foundItem.unit.value = foundItem.unit.value + item.unit.value
+      } else {
+        state.cart.push(item)
+      }
+    },
+    REMOVE_FROM_CART(state, item) {
+      state.cart = state.cart.filter(i => i.id !== item.id)
+    },
+    EMPTY_CART(state) {
+      state.cart = []
     }
   },
   actions: {
@@ -55,6 +66,9 @@ export default new Vuex.Store({
       if (!state.shop.sections) return []
       let section = state.shop.sections.find(section => {return section.id == categoryId})
       return section.items || []
+    },
+    cart: (state) => {
+      return state.cart
     }
   },
   modules: {
