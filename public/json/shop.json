@@ -49,6 +49,11 @@
           "id": "celery", "name": "Celery",
           "unit": { "name": "", "increment": 1, "value": 1},
           "image": "/img/shop/items/celery.jpeg"
+        },
+        {
+          "id": "coconot", "name": "Coconut",
+          "unit": { "name": "", "increment": 1, "value": 1},
+          "image": "/img/shop/items/coconut.jpeg"
         }
       ]
     },
