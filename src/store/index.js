@@ -8,7 +8,7 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    profile: localStorage.getItem('pazar_p') ? JSON.parse(sjcl.decrypt(K, atob(localStorage.getItem('pazar_p')))) : {name: '', email: '', pin: '', contact: { name: '', email: '' }},
+    profile: localStorage.getItem('pazar_p') ? JSON.parse(sjcl.decrypt(K, atob(localStorage.getItem('pazar_p')))) : { name: '', email: '', pin: '', contact: { name: '', email: '' } },
     shoppingLists: [],
     status: 'Ready',
     shop: {},
@@ -17,8 +17,8 @@ export default new Vuex.Store({
   mutations: {
     SET_PROFILE(state, profile) {
       state.profile = profile
-      console.log( JSON.stringify(state.profile))
-      localStorage.setItem('pazar_p',btoa(sjcl.encrypt(K, JSON.stringify(state.profile))))
+      console.log(JSON.stringify(state.profile))
+      localStorage.setItem('pazar_p', btoa(sjcl.encrypt(K, JSON.stringify(state.profile))))
     },
     // SET_USER(state, user) {
     //   state.user = user
@@ -79,7 +79,7 @@ export default new Vuex.Store({
   },
   getters: {
     shopCategories(state) {
-      if(!state.shop.sections) {
+      if (!state.shop.sections) {
         return []
       }
       return state.shop.sections.map(item => {
@@ -88,11 +88,14 @@ export default new Vuex.Store({
     },
     categoryItems: (state) => categoryId => {
       if (!state.shop.sections) return []
-      let section = state.shop.sections.find(section => {return section.id == categoryId})
+      let section = state.shop.sections.find(section => { return section.id == categoryId })
       return section.items || []
     },
     cart: (state) => {
       return state.cart
+    },
+    hasProfile: (state) => {
+      return (state.profile.name && state.profile.email && state.profile.pin && state.profile.contact.name && state.profile.contact.email)
     }
   },
   modules: {
