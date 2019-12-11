@@ -8,6 +8,7 @@ export default new Vuex.Store({
   state: {
     user: localStorage.getItem('u') ? atob(localStorage.getItem('u')) : '',
     pin: null,
+    contact: localStorage.getItem('c') ? atob(localStorage.getItem('c')) : '',
     shoppingLists: [],
     status: 'Ready',
     shop: {},
@@ -17,6 +18,10 @@ export default new Vuex.Store({
     SET_USER(state, user) {
       state.user = user
       localStorage.setItem('u', btoa(user))
+    },
+    SET_CONTACT(state, contact) {
+      state.contact = contact
+      localStorage.setItem('c', btoa(contact))
     },
     SET_PIN(state, pin) {
       state.pin = pin
@@ -45,6 +50,9 @@ export default new Vuex.Store({
   actions: {
     fetchUser(context) {
       context.commit('SET_USER', localStorage.getItem('u'))
+    },
+    fetchContact(context) {
+      context.commit('SET_CONTACT', localStorage.getItem('c'))
     },
     async fetchShop(context) {
       context.commit('SET_STATUS', 'Loading')
