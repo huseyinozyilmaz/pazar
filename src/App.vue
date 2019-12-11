@@ -1,22 +1,22 @@
 <template>
   <div id="app">
-    <div id="nav" v-if="!isSignedIn">
+    <!-- <div id="nav" v-if="!isSignedIn">
       <button class="btn" @click="onBackClicked"><ArrowBackIcon/></button>
-    </div>
+    </div> -->
     <section class="pages">
       <router-view/>
     </section>
-    <AppFooter v-if="isSignedIn"/>
+    <AppFooter v-if="!isHome"/>
   </div>
 </template>
 
 <script>
-import ArrowBackIcon from "@/icons/ArrowBackIcon.vue"
+// import ArrowBackIcon from "@/icons/ArrowBackIcon.vue"
 import AppFooter from "@/components/AppFooter.vue"
 
 export default {
   components: {
-    ArrowBackIcon,
+    // ArrowBackIcon,
     AppFooter
   },
   methods: {
