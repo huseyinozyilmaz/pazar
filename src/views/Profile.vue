@@ -4,19 +4,35 @@
     <header><PersonIcon class="icon"/></header>
     <form class="form">
       <div>
-        <label for="user-email">Your email address</label>
-        <input type="email" class="form-control" placeholder="Enter your email address to start" v-model="user">
+        <label for="user-name">Your name</label>
+        <input type="text" class="form-control" placeholder="Enter your name" v-model="profile.name">
       </div>
       <div>
-        <label for="user-contact">Your contact</label>
-        <input type="email" class="form-control" placeholder="Email of your contact" v-model="contact">
+        <label for="user-email">Your email address</label>
+        <input type="email" class="form-control" placeholder="Enter your email address to start" v-model="profile.email">
       </div>
       <div>
         <label for="user-passcode">Passcode</label>
-        <input type="password" class="form-control passcode" placeholder="Enter 4 digit pass code" v-model="passcode">
+        <input type="password" class="form-control passcode" placeholder="Enter a pass code" v-model="profile.pin">
       </div>
+      <section class=contact>
+        <header>
+          <h3 class="title">Contact</h3>
+          <p class="subtitle">Add details of the person you share your shopping lists</p>
+        </header>
+        <div>
+          <label for="user-contact-name">Contact name</label>
+          <input type="text" class="form-control" placeholder="Name of your contact" v-model="profile.contact.name">
+        </div>
+        <div>
+          <label for="user-contact-email">Contact email</label>
+          <input type="email" class="form-control" placeholder="Email of your contact" v-model="profile.contact.email">
+        </div>
+      </section>
+      
+      
     </form>
-    <button class="btn btn-large" :disabled="!user" @click="onSave">Save</button>
+    <button class="btn btn-large" :disabled="invalid()" @click="onSave">Save</button>
   
   </div>
 </template>
@@ -31,33 +47,25 @@ export default {
   },
   methods: {
     onSave() {
-      this.$store.commit('SET_PIN', this.passcode)
+      this.$store.commit('SET_PROFILE', this.$store.state.profile)
       this.$router.push({ name: 'shopping-lists'})
+    },
+    invalid() {
+      return !(this.$store.state.profile.name && 
+        this.$store.state.profile.email &&
+        this.$store.state.profile.pin &&
+        this.$store.state.profile.contact.name &&
+        this.$store.state.profile.contact.email
+      )
     }
   },
   computed: {
-    user: {
+    profile: {
       get () {
-        return this.$store.state.user
+        return this.$store.state.profile
       },
       set (value) {
-        this.$store.commit('SET_USER', value)
-      }
-    },
-    contact: {
-      get () {
-        return this.$store.state.contact
-      },
-      set (value) {
-        this.$store.commit('SET_CONTACT', value)
-      }
-    },
-    passcode: {
-      get () {
-        return this.$store.state.pin
-      },
-      set (value) {
-        this.$store.commit('SET_PIN', value)
+        this.$store.commit('SET_PROFILE', value)
       }
     }
   }
@@ -76,5 +84,12 @@ export default {
 }
 .passcode {
   text-align: center;
+}
+.contact .title {
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+.contact .subtitle {
+  margin-top: 0;
 }
 </style>
