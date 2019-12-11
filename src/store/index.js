@@ -95,7 +95,11 @@ export default new Vuex.Store({
       return state.cart
     },
     hasProfile: (state) => {
-      return (state.profile.name && state.profile.email && state.profile.pin && state.profile.contact.name && state.profile.contact.email)
+      if (state.profile.name && state.profile.email && state.profile.pin && state.profile.contact.name && state.profile.contact.email) {
+        return true
+      } else {
+        return false
+      }
     }
   },
   modules: {
