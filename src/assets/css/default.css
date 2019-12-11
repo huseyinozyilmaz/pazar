@@ -85,7 +85,7 @@ input[type=text]:focus, input[type=password]:focus, input[type=email]:focus {
 	width: 1.2rem;
 }
 
-.btn-large {
+.btn-large, .btn-cancel {
 	border-radius: 0.5rem;
 	padding-left: 2rem;
 	padding-right: 2rem;
@@ -95,6 +95,12 @@ input[type=text]:focus, input[type=password]:focus, input[type=email]:focus {
 	letter-spacing: 2px;
 	font-weight: 600;
 	background-color: tomato;
+}
+.btn-cancel {
+	background-color: #eee;
+	padding-left: 1rem;
+	padding-right: 1rem;
+	margin-right: 1rem;
 }
 
 .app-footer {
@@ -124,4 +130,31 @@ input[type=text]:focus, input[type=password]:focus, input[type=email]:focus {
 .icon-medium {
 	width: 28px;
 	vertical-align: middle;
+}
+
+.form {
+	max-width: 300px;
+  margin: 3% auto;
+}
+.form label {
+  display: block;
+  width: 100%;
+  text-align: left;
+  padding: .4rem 0;
+}
+.form input {
+  width: 100%;
+  margin-bottom: 0.5rem; 
+}
+
+.theme-orange .vdatetime-popup__header,
+.theme-orange .vdatetime-calendar__month__day--selected > span > span,
+.theme-orange .vdatetime-calendar__month__day--selected:hover > span > span {
+  background: tomato;
+}
+
+.theme-orange .vdatetime-year-picker__item--selected,
+.theme-orange .vdatetime-time-picker__item--selected,
+.theme-orange .vdatetime-popup__actions__button {
+  color: tomato;
 }

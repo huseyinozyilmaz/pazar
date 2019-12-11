@@ -2,7 +2,7 @@
   <div class="profile">
     <h1>Profile</h1>
     <header><PersonIcon class="icon"/></header>
-    <form>
+    <form class="form">
       <div>
         <label for="user-email">Your email address</label>
         <input type="email" class="form-control" placeholder="Enter your email address to start" v-model="user">
@@ -73,20 +73,6 @@ export default {
   border: 3px solid #999;
   border-radius: 50%;
   padding: 1rem;
-}
-label {
-  display: block;
-  width: 100%;
-  text-align: left;
-  padding: .4rem 0;
-}
-form {
-  max-width: 300px;
-  margin: 3% auto;
-}
-input {
-  width: 100%;
-  margin-bottom: 0.5rem; 
 }
 .passcode {
   text-align: center;

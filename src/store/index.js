@@ -77,7 +77,8 @@ export default new Vuex.Store({
     },
     cart: (state) => {
       return state.cart
-    }
+    },
+    contact: (state) => { return state.contact }
   },
   modules: {
   }
