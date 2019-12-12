@@ -1,44 +1,68 @@
 <template>
   <div class="profile">
     <h1>Profile</h1>
-    <header><PersonIcon class="icon"/></header>
+    <header>
+      <PersonIcon class="icon-large" />
+    </header>
     <form class="form">
       <div>
         <label for="user-name">Your name</label>
-        <input type="text" class="form-control" placeholder="Enter your name" v-model="profile.name">
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Enter your name"
+          v-model="profile.name"
+        />
       </div>
       <div>
         <label for="user-email">Your email address</label>
-        <input type="email" class="form-control" placeholder="Enter your email address to start" v-model="profile.email">
+        <input
+          type="email"
+          class="form-control"
+          placeholder="Enter your email address to start"
+          v-model="profile.email"
+        />
       </div>
       <div>
         <label for="user-passcode">Passcode</label>
-        <input type="password" class="form-control passcode" placeholder="Enter a pass code" v-model="profile.pin">
+        <input
+          type="password"
+          class="form-control passcode"
+          placeholder="Enter a pass code"
+          v-model="profile.pin"
+        />
       </div>
-      <section class=contact>
+      <section class="contact">
         <header>
           <h3 class="title">Contact</h3>
           <p class="subtitle">Add details of the person you share your shopping lists</p>
         </header>
         <div>
           <label for="user-contact-name">Contact name</label>
-          <input type="text" class="form-control" placeholder="Name of your contact" v-model="profile.contact.name">
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Name of your contact"
+            v-model="profile.contact.name"
+          />
         </div>
         <div>
           <label for="user-contact-email">Contact email</label>
-          <input type="email" class="form-control" placeholder="Email of your contact" v-model="profile.contact.email">
+          <input
+            type="email"
+            class="form-control"
+            placeholder="Email of your contact"
+            v-model="profile.contact.email"
+          />
         </div>
       </section>
-      
-      
     </form>
     <button class="btn btn-large" :disabled="invalid()" @click="onSave">Save</button>
-  
   </div>
 </template>
 
 <script>
-import PersonIcon from '@/icons/PersonIcon.vue'
+import PersonIcon from "@/icons/PersonIcon.vue";
 
 export default {
   name: "profile",
@@ -47,41 +71,33 @@ export default {
   },
   methods: {
     onSave() {
-      this.$store.commit('SET_PROFILE', this.$store.state.profile)
-      this.$router.push({ name: 'shopping-lists'})
+      this.$store.commit("SET_PROFILE", this.$store.state.profile);
+      this.$router.push({ name: "shopping-lists" });
     },
     invalid() {
-      return !(this.$store.state.profile.name && 
+      return !(
+        this.$store.state.profile.name &&
         this.$store.state.profile.email &&
         this.$store.state.profile.pin &&
         this.$store.state.profile.contact.name &&
         this.$store.state.profile.contact.email
-      )
+      );
     }
   },
   computed: {
     profile: {
-      get () {
-        return this.$store.state.profile
+      get() {
+        return this.$store.state.profile;
       },
-      set (value) {
-        this.$store.commit('SET_PROFILE', value)
+      set(value) {
+        this.$store.commit("SET_PROFILE", value);
       }
     }
   }
-}
-
+};
 </script>
 
 <style scoped>
-.icon {
-  max-height: 96px;
-  max-width: 96px;
-  fill: #555;
-  border: 3px solid #999;
-  border-radius: 50%;
-  padding: 1rem;
-}
 .passcode {
   text-align: center;
 }

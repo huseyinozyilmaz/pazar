@@ -10,53 +10,45 @@ export default new Vuex.Store({
   state: {
     profile: localStorage.getItem('pazar_p') ? JSON.parse(sjcl.decrypt(K, atob(localStorage.getItem('pazar_p')))) : { name: '', email: '', pin: '', contact: { name: '', email: '' } },
     shoppingLists: [],
+    selectedShoppingList: null,
     status: 'Ready',
-    shop: {},
-    cart: []
+    shop: {}
   },
   mutations: {
     SET_PROFILE(state, profile) {
       state.profile = profile
-      console.log(JSON.stringify(state.profile))
       localStorage.setItem('pazar_p', btoa(sjcl.encrypt(K, JSON.stringify(state.profile))))
     },
-    // SET_USER(state, user) {
-    //   state.user = user
-    //   localStorage.setItem('u', btoa(user))
-    // },
-    // SET_CONTACT(state, contact) {
-    //   state.contact = contact
-    //   localStorage.setItem('c', btoa(contact))
-    // },
-    // SET_PIN(state, pin) {
-    //   state.pin = pin
-    //   localStorage.setItem('c', btoa(pin))
-    // },
     SET_STATUS(state, status) {
       state.status = status
     },
     SET_SHOP(state, shop) {
       state.shop = shop
     },
-    SET_SHOPPING_LIST(state, list) {
+    SET_SHOPPING_LISTS(state, list) {
       state.shoppingLists = list
+    },
+    SET_SELECTED_SHOPPING_LIST(state, list) {
+      state.selectedShoppingList = list
     },
     ADD_TO_SHOPPING_LIST(state, item) {
       state.shoppingLists.push(item)
     },
     ADD_TO_CART(state, item) {
-      let foundItem = state.cart.find(i => i.id === item.id)
+      let foundItem = state.selectedShoppingList.items.find(i => i.id === item.id)
       if (foundItem) {
         foundItem.unit.value = foundItem.unit.value + item.unit.value
       } else {
-        state.cart.push(item)
+        state.selectedShoppingList.items.push(item)
       }
     },
     REMOVE_FROM_CART(state, item) {
-      state.cart = state.cart.filter(i => i.id !== item.id)
+      if (state.selectedShoppingList.items) {
+        state.selectedShoppingList.items = state.selectedShoppingList.items.filter(i => i.id !== item.id)
+      }
     },
     EMPTY_CART(state) {
-      state.cart = []
+      state.selectedShoppingList.items = []
     }
   },
   actions: {
@@ -92,7 +84,8 @@ export default new Vuex.Store({
       return section.items || []
     },
     cart: (state) => {
-      return state.cart
+      if (!state.selectedShoppingList || !state.selectedShoppingList.items) return null
+      return state.selectedShoppingList.items
     },
     hasProfile: (state) => {
       if (state.profile.name && state.profile.email && state.profile.pin && state.profile.contact.name && state.profile.contact.email) {
