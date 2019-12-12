@@ -28,8 +28,12 @@ export default {
       
     }
   },
+  async created() {
+    await this.$store.dispatch('fetchShoppingLists')
+  },
   computed: {
     shoppingLists() {
+      console.log(this.$store.state.shoppingLists.length)
       return this.$store.state.shoppingLists
     }
   }

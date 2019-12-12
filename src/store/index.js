@@ -26,12 +26,13 @@ export default new Vuex.Store({
       state.shop = shop
     },
     SET_SHOPPING_LISTS(state, list) {
+      console.log('Setting Shopping List')
       state.shoppingLists = list
     },
     SET_SELECTED_SHOPPING_LIST(state, list) {
       state.selectedShoppingList = list
     },
-    ADD_TO_SHOPPING_LIST(state, item) {
+    ADD_TO_SHOPPING_LISTS(state, item) {
       state.shoppingLists.push(item)
     },
     ADD_TO_CART(state, item) {
@@ -63,10 +64,15 @@ export default new Vuex.Store({
     },
     async fetchShoppingLists({ commit, state }) {
       commit('SET_STATUS', 'Loading')
-      let userId = sjcl.encrypt(state.pin, state.user)
-      let { data } = await Axios.get(`/api/user/${userId}`)
+      let { data } = await Axios.get(`/api/profile/${getProfileId(state.profile)}/list`)
+      console.log(data)
+      commit('SET_SHOPPING_LISTS', data)
       commit('SET_STATUS', 'Ready')
-      commit('SET_SHOPPING_LIST', data)
+    },
+    async createShoppingList ({ commit, state }, list) {
+      list.profileId = getProfileId(state.profile)
+      await Axios.post(`/api/profile/${list.profileId}/list`, list)
+      commit('ADD_TO_SHOPPING_LISTS', list)
     }
   },
   getters: {
@@ -93,8 +99,18 @@ export default new Vuex.Store({
       } else {
         return false
       }
+    },
+    profile: (state) => {
+      let publicProfile = JSON.parse(JSON.stringify(state.profile))
+      delete publicProfile.pin
+      return publicProfile
     }
   },
   modules: {
   }
 })
+
+function getProfileId(profile) {
+  let profileIdBitArray = sjcl.hash.sha256.hash(profile.email + profile.pin)
+  return sjcl.codec.hex.fromBits(profileIdBitArray)
+}

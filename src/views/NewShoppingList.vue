@@ -52,9 +52,10 @@ export default {
     return {
       shoppingList: {
         id: "",
-        name: "",
-        date: "",
-        recipient: "s",
+        profileId: "",
+        name: "For Today",
+        date: new Date().toISOString(),
+        recipient: "",
         priority: "medium",
         items: []
       }
@@ -66,6 +67,8 @@ export default {
   methods: {
     onCreateList() {
       this.shoppingList.id = new Date().getTime()
+      this.$store.dispatch('createShoppingList', this.shoppingList)
+      this.$router.push({ name: 'shopping-lists'})
     },
     onCancel() {
       this.$router.push({ name: 'shopping-lists'})
@@ -75,7 +78,7 @@ export default {
     }
   },
   mounted () {
-    this.shoppingList.recipient = this.$store.getters.contact
+    this.shoppingList.recipient = this.$store.getters.profile.contact.name
   }
 };
 </script>

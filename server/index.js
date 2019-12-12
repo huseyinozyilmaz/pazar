@@ -1,24 +1,59 @@
 const express = require('express')
 const cors = require('cors')
 const path = require('path')
-const low = require('lowdb')
-const FileSync = require('lowdb/adapters/FileSync')
 const port = process.env.PORT || 8081
-const adapter = new FileSync(path.join(__dirname, '../public/json/shop.json'))
-const db = low(adapter)
+const shop = require('./shop')
+const profiles = require('./profiles')
 
 const app = express()
 app.use(cors())
 app.use(express.json())
 app.use(express.static(path.join(__dirname, 'public')))
 
-app.get('/api/store', (req, res) => {
-  res.json(db.get('sections').value())
+app.get('/api/shop', (req, res) => {
+  res.json(shop.getSections())
+})
+
+app.get('/api/profile/:profileId/list/:listId', (req, res) => {
+  const { profileId, listId } = req.params
+  res.json(profiles.readShoppingList(profileId, listId))
+})
+app.put('/api/profile/:profileId/list/:listId', (req, res) => {
+  const { profileId, listId } = req.params
+  const { list } = req.body
+  profiles.updateShoppingList(profileId, listId, list)
+  res.sendStatus(204)
+})
+app.delete('/api/profile/:profileId/list/:listId', (req, res) => {
+  const { profileId, listId } = req.params
+  profiles.deleteShoppingList(profileId, listId)
+  res.sendStatus(204)
+})
+app.get('/api/profile/:profileId/list', (req, res) => {
+  const { profileId } = req.params
+  console.log(profiles.readShoppingLists(profileId))
+  res.json(profiles.readShoppingLists(profileId))
+})
+app.post('/api/profile/:profileId/list', (req, res) => {
+  profiles.createShoppingList(req.body)
+  res.sendStatus(201)
+})
+
+app.get('/api/profile/:id', (req, res) => {
+  res.json({id: req.params.id})
+})
+
+app.get('/api/profile/:profileId/list', (req, res) => {
+  const { profileId } = req.params
+  res.json(profiles.readShoppingList(profileId))
 })
 
 app.get('/api', (req, res) => {
   res.json({ version: 1 })
 })
+
+app.use((req, res) => res.status(404).json({ error: 404 }))
+app.use((req, res) => res.status(500).json({ error: 500 }))
 
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static(path.join(__dirname, '/public/')))
