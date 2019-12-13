@@ -6,7 +6,10 @@
     </div>
     <div class="card" :style="{ backgroundColor: activeColor }">
       <a href="#" @click="onClick">
-        <div class="count">{{shoppingList.items.length | cartsize }}</div>
+        <header>
+          <div class="count">{{shoppingList.items.length | cartsize }}</div>
+          <div class="priority">{{shoppingList.priority | priority }}</div>
+        </header>
         <h2 class="name">{{shoppingList.name}}</h2>
       </a>
       <footer>
@@ -39,8 +42,15 @@ export default {
   },
   data() {
     return {
-      palette: ['#D8334A', '#FFCE54', '#FC6E51', '#A0D468', '#4FC1E9', '#8067B7']
-    }
+      palette: [
+        "#D8334A",
+        "#FFCE54",
+        "#FC6E51",
+        "#A0D468",
+        "#4FC1E9",
+        "#8067B7"
+      ]
+    };
   },
   components: {
     PersonIcon,
@@ -55,7 +65,7 @@ export default {
   },
   computed: {
     activeColor() {
-      return this.palette[this.index % this.palette.length]
+      return this.palette[this.index % this.palette.length];
     }
   }
 };
@@ -88,7 +98,7 @@ export default {
 }
 .card {
   flex: 5;
-  background-color: #D8334A;
+  background-color: #d8334a;
   border-radius: 6px;
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
   padding: 10px;
@@ -103,8 +113,18 @@ export default {
   text-decoration: none;
   color: white;
 }
+.card header {
+  display: flex;
+}
 .count {
   text-align: left;
+  flex: 1;
+}
+.priority {
+  font-weight: 600;
+  flex: 1;
+  text-align: right;
+  padding: 0 4px;
 }
 .shopping-lists-item footer {
   display: flex;

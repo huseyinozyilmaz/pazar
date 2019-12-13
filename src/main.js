@@ -9,17 +9,21 @@ import '@/assets/css/default.css'
 
 Vue.config.productionTip = false
 
-Vue.filter('cartsize', function(value) {
+Vue.filter('cartsize', function (value) {
   if (!value) return "Empty List";
   return value > 1 ? `${value} Items` : `${value} Item`;
 })
-Vue.filter('day', function(value) {
+Vue.filter('day', function (value) {
   if (!value) return "";
   return DateTime.fromISO(value).toFormat("dd");
 })
-Vue.filter('month', function(value) {
+Vue.filter('month', function (value) {
   if (!value) return "";
   return DateTime.fromISO(value).toFormat("LLL");
+})
+Vue.filter('priority', function (value) {
+  if (!value) return "";
+  return value.charAt(0).toUpperCase()
 })
 
 new Vue({

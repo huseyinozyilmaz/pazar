@@ -39,12 +39,9 @@ export default {
   min-width: 300px;
   display: flex;
   padding: 6px;
-  border-bottom: 1px solid #eee;
+  border-top: 1px solid #eee;
   align-items: center;
   justify-content: center;
-}
-.card:first-of-type {
-  border-top: 1px solid #eee;
 }
 .col {
   flex: 1;
