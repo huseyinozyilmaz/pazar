@@ -1,8 +1,7 @@
 <template>
   <div class="cart">
     <h1>{{title}}</h1>
-    <EmptyShoppingListBacklog v-if="!items" />
-    <section v-else>
+    <section>
       <header>
         <div class="col">
           <CartIcon class="cart-icon" />
@@ -41,7 +40,6 @@ import CartIcon from "@/icons/CartIcon.vue";
 import SendIcon from "@/icons/SendIcon.vue";
 import TrashIcon from "@/icons/TrashIcon.vue";
 import CartItem from "@/components/CartItem.vue";
-import EmptyShoppingListBacklog from "@/components/EmptyShoppingListBacklog.vue";
 export default {
   data() {
     return {
@@ -52,8 +50,7 @@ export default {
     CartItem,
     SendIcon,
     TrashIcon,
-    CartIcon,
-    EmptyShoppingListBacklog
+    CartIcon
   },
   methods: {
     onEmptyCart() {

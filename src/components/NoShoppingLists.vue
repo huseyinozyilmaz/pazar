@@ -11,7 +11,7 @@
 
 <script>
 export default {
-  name: "EmptyShoppingListBacklog",
+  name: "NoShoppingLists",
   methods: {
     onCreateList() {
       this.$router.push({ name: "new-shopping-list" });

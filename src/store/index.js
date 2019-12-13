@@ -69,7 +69,7 @@ export default new Vuex.Store({
       commit('SET_SHOPPING_LISTS', data)
       commit('SET_STATUS', 'Ready')
     },
-    async createShoppingList ({ commit, state }, list) {
+    async createShoppingList({ commit, state }, list) {
       list.profileId = getProfileId(state.profile)
       await Axios.post(`/api/profile/${list.profileId}/list`, list)
       commit('ADD_TO_SHOPPING_LISTS', list)
@@ -99,6 +99,9 @@ export default new Vuex.Store({
       } else {
         return false
       }
+    },
+    hasSelectedShoppingList: (state) => {
+      return state.selectedShoppingList !== null ? true : false
     },
     profile: (state) => {
       let publicProfile = JSON.parse(JSON.stringify(state.profile))

@@ -58,10 +58,14 @@ const router = new VueRouter({
 })
 
 router.beforeEach((to, from, next) => {
-  if (store.getters.hasProfile || to.name === 'home') {
+  if (to.name === 'home') {
     next()
-  } else {
+  } else if (!store.getters.hasProfile) {
     next('/profile')
+  } else if (!store.getters.hasSelectedShoppingList && to.name === 'cart') {
+    next('/shopping-lists')
+  } else {
+    next()
   }
 })
 

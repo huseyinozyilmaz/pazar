@@ -31,7 +31,6 @@ app.delete('/api/profile/:profileId/list/:listId', (req, res) => {
 })
 app.get('/api/profile/:profileId/list', (req, res) => {
   const { profileId } = req.params
-  console.log(profiles.readShoppingLists(profileId))
   res.json(profiles.readShoppingLists(profileId))
 })
 app.post('/api/profile/:profileId/list', (req, res) => {
@@ -40,7 +39,7 @@ app.post('/api/profile/:profileId/list', (req, res) => {
 })
 
 app.get('/api/profile/:id', (req, res) => {
-  res.json({id: req.params.id})
+  res.json({ id: req.params.id })
 })
 
 app.get('/api/profile/:profileId/list', (req, res) => {
