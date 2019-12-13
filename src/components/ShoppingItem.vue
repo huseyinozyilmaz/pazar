@@ -5,7 +5,7 @@
       <div class="shopping-item-title">{{item.name}}</div>
     </header>
     <footer class="shopping-item-footer">
-      <QuantityInput :quantity.sync="activeItem.unit" class="quantity"/>
+      <QuantityInput :quantity.sync="activeItem.unit" class="quantity" />
       <p>
         <button class="btn-item btn-chart" @click="onCartClick">
           <CartIcon class="icon-small" />
@@ -17,7 +17,7 @@
 
 <script>
 import CartIcon from "@/icons/CartIcon";
-import QuantityInput from '@/components/QuantityInput'
+import QuantityInput from "@/components/QuantityInput";
 export default {
   name: "ShoppingItem",
   data() {
@@ -46,7 +46,7 @@ export default {
   flex: 0 1 49.5%;
 }
 .shopping-item {
-  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
+  /* box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2); */
   transition: 0.3s;
   min-width: 150px;
   max-width: 220px;
@@ -88,7 +88,7 @@ export default {
 }
 .btn-chart {
   padding: 0 10px;
-  /* border: 2px solid tomato; */
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
   border-radius: 50%;
   fill: white;
   background-color: tomato;

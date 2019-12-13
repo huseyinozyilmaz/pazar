@@ -2,11 +2,11 @@
   <div>
     <article class="card" v-for="item in items" :key="item.id">
       <div class="col">
-        <img class="item-image" :src="item.image" :alt="item.name">
+        <img class="item-image" :src="item.image" :alt="item.name" />
       </div>
       <div class="col">
         <h4 class="item-title">{{item.name}}</h4>
-        <QuantityInput :quantity.sync="item.unit" class="quantity"/>
+        <QuantityInput :quantity.sync="item.unit" class="quantity" />
         <a href="javascript:void(0)" class="item-remove" @click="onRemoveItem($event, item)">Remove</a>
       </div>
     </article>
@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import QuantityInput from '@/components/QuantityInput'
+import QuantityInput from "@/components/QuantityInput";
 
 export default {
   name: "CartItems",
@@ -23,12 +23,7 @@ export default {
   },
   methods: {
     onRemoveItem(item) {
-      this.$store.commit('REMOVE_FROM_CART', item)
-    },
-    onQuantityChange(value, item) {
-      console.log(value)
-      console.log(item)
-      //this.activeItem.unit.value = value
+      this.$store.commit("REMOVE_FROM_CART", item);
     }
   },
   computed: {

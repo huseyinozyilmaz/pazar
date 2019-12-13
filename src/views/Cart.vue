@@ -3,9 +3,10 @@
     <section>
       <CartHeader />
       <h4 class="cart-name">{{selectedShoppingList.name}}</h4>
-      <CartSendHeader :recipient="selectedShoppingList.recipient"/>
+      <CartSendHeader :recipient="selectedShoppingList.recipient" />
       <CartItems />
-      <CartFooter v-if="items.length"/>
+      <CartCustomItem />
+      <CartFooter v-if="items.length" />
       <cartEmpty v-else />
     </section>
   </div>
@@ -13,6 +14,7 @@
 
 <script>
 import CartItems from "@/components/CartItems.vue";
+import CartCustomItem from "@/components/CartCustomItem.vue";
 import CartHeader from "@/components/CartHeader.vue";
 import CartSendHeader from "@/components/CartSendHeader.vue";
 import CartFooter from "@/components/CartFooter.vue";
@@ -23,6 +25,7 @@ export default {
     CartHeader,
     CartSendHeader,
     CartItems,
+    CartCustomItem,
     CartFooter,
     CartEmpty
   },
@@ -31,7 +34,7 @@ export default {
       return this.$store.getters.cart;
     },
     selectedShoppingList() {
-      return this.$store.state.selectedShoppingList
+      return this.$store.state.selectedShoppingList;
     }
   }
 };
