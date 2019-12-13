@@ -3,9 +3,10 @@
     <h1>Shopping Lists</h1>
     <div v-if="shoppingListsExist">
       <ShoppingListsItem
-        v-for="shoppingList in shoppingLists"
+        v-for="(shoppingList, index) in shoppingLists"
         :key="shoppingList.id"
         :shoppingList="shoppingList"
+        :index="index"
       />
     </div>
     <NoShoppingLists v-else />

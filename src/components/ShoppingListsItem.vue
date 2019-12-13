@@ -4,7 +4,7 @@
       <dir class="day">{{ shoppingList.date | day }}</dir>
       <dir class="month">{{ shoppingList.date | month }}</dir>
     </div>
-    <div class="card">
+    <div class="card" :style="{ backgroundColor: activeColor }">
       <a href="#" @click="onClick">
         <div class="count">{{shoppingList.items.length | cartsize }}</div>
         <h2 class="name">{{shoppingList.name}}</h2>
@@ -19,7 +19,7 @@
           </button>
         </div>
         <div class="recipient">
-          <PersonIcon class="icon-small" />
+          <PersonIcon class="icon-small" style="fill: #fff;" />
           {{shoppingList.recipient}}
         </div>
       </footer>
@@ -35,7 +35,13 @@ import { DateTime } from "luxon";
 export default {
   name: "ShoppingListsItem",
   props: {
-    shoppingList: Object
+    shoppingList: Object,
+    index: Number
+  },
+  data() {
+    return {
+      palette: ['#D8334A', '#FFCE54', '#FC6E51', '#A0D468', '#4FC1E9', '#8067B7']
+    }
   },
   components: {
     PersonIcon,
@@ -60,6 +66,11 @@ export default {
     month(value) {
       if (!value) return "";
       return DateTime.fromISO(value).toFormat("LLL");
+    }
+  },
+  computed: {
+    activeColor() {
+      return this.palette[this.index % this.palette.length]
     }
   }
 };
@@ -92,10 +103,12 @@ export default {
 }
 .card {
   flex: 5;
-  background-color: #fefefe;
+  background-color: #D8334A;
   border-radius: 6px;
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
   padding: 10px;
+  padding-bottom: 20px;
+  color: white;
 }
 .card h2 {
   margin: 0;
@@ -103,6 +116,7 @@ export default {
 }
 .card a {
   text-decoration: none;
+  color: white;
 }
 .count {
   text-align: left;
@@ -121,6 +135,6 @@ export default {
 .recipient {
   text-align: right;
   padding-right: 6px;
-  flex: 3;
+  flex: 2;
 }
 </style>
