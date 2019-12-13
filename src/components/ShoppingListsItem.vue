@@ -31,7 +31,6 @@
 import PersonIcon from "@/icons/PersonIcon.vue";
 import CreateIcon from "@/icons/CreateIcon.vue";
 import TrashIcon from "@/icons/TrashIcon.vue";
-import { DateTime } from "luxon";
 export default {
   name: "ShoppingListsItem",
   props: {
@@ -52,20 +51,6 @@ export default {
     onClick() {
       this.$store.commit("SET_SELECTED_SHOPPING_LIST", this.shoppingList);
       this.$router.push({ name: "cart" });
-    }
-  },
-  filters: {
-    cartsize(value) {
-      if (!value) return "Empty List";
-      return value > 1 ? `${value} Items` : `${value} Item`;
-    },
-    day(value) {
-      if (!value) return "";
-      return DateTime.fromISO(value).toFormat("dd");
-    },
-    month(value) {
-      if (!value) return "";
-      return DateTime.fromISO(value).toFormat("LLL");
     }
   },
   computed: {

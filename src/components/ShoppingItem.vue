@@ -5,15 +5,7 @@
       <div class="shopping-item-title">{{item.name}}</div>
     </header>
     <footer class="shopping-item-footer">
-      <span class="button-group">
-        <button class="btn-item btn-unit" @click="onDecrementClick">
-          <RemoveIcon class="icon-small" />
-        </button>
-        <span class="unit-title">{{activeItem.unit.value}} {{item.unit.name}}</span>
-        <button class="btn-item btn-unit" @click="onIncrementClick">
-          <AddIcon class="icon-small" />
-        </button>
-      </span>
+      <QuantityInput :quantity.sync="activeItem.unit" class="quantity"/>
       <p>
         <button class="btn-item btn-chart" @click="onCartClick">
           <CartIcon class="icon-small" />
@@ -25,8 +17,7 @@
 
 <script>
 import CartIcon from "@/icons/CartIcon";
-import AddIcon from "@/icons/AddIcon";
-import RemoveIcon from "@/icons/RemoveIcon";
+import QuantityInput from '@/components/QuantityInput'
 export default {
   name: "ShoppingItem",
   data() {
@@ -39,20 +30,9 @@ export default {
   },
   components: {
     CartIcon,
-    AddIcon,
-    RemoveIcon
+    QuantityInput
   },
   methods: {
-    onIncrementClick() {
-      this.activeItem.unit.value =
-        this.activeItem.unit.value + this.activeItem.unit.increment;
-    },
-    onDecrementClick() {
-      if (this.activeItem.unit.value > this.activeItem.unit.increment) {
-        this.activeItem.unit.value =
-          this.activeItem.unit.value - this.activeItem.unit.increment;
-      }
-    },
     onCartClick() {
       this.$store.commit("ADD_TO_CART", this.activeItem);
       this.activeItem = this.item;
@@ -84,14 +64,8 @@ export default {
 .shopping-item-footer {
   margin: 10px 0;
 }
-.unit-title {
-  min-width: 60px;
-  display: inline-block;
-  font-size: small;
-  border: 1px solid #ddd;
-  line-height: 34px;
-  max-height: 36px;
-  padding: 0;
+.quantity {
+  margin: 0 auto;
 }
 .btn-item {
   border: none;
@@ -111,19 +85,6 @@ export default {
   transform: translateY(2px);
   fill: #fff;
   color: #fff;
-}
-.btn-unit {
-  padding: 0 10px;
-}
-.btn-unit:first-of-type {
-  border-left: 1px solid #ddd;
-  border-top-left-radius: 6px;
-  border-bottom-left-radius: 6px;
-}
-.btn-unit:last-of-type {
-  border-right: 1px solid #ddd;
-  border-top-right-radius: 6px;
-  border-bottom-right-radius: 6px;
 }
 .btn-chart {
   padding: 0 10px;
