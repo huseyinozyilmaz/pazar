@@ -8,6 +8,11 @@
         :shoppingList="shoppingList"
         :index="index"
       />
+      <p>
+        <button class="btn btn-medium" @click="onCreateList">
+          <AddIcon class="icon-small" />
+        </button>
+      </p>
     </div>
     <NoShoppingLists v-else />
   </div>
@@ -16,6 +21,7 @@
 <script>
 import NoShoppingLists from "@/components/NoShoppingLists.vue";
 import ShoppingListsItem from "@/components/ShoppingListsItem.vue";
+import AddIcon from "@/icons/AddIcon";
 export default {
   name: "shopping-lists",
   data() {
@@ -23,10 +29,13 @@ export default {
   },
   components: {
     NoShoppingLists,
-    ShoppingListsItem
+    ShoppingListsItem,
+    AddIcon
   },
   methods: {
-    onGoClicked() {}
+    onCreateList() {
+      this.$router.push({ name: "new-shopping-list" });
+    }
   },
   async created() {
     await this.$store.dispatch("fetchShoppingLists");
