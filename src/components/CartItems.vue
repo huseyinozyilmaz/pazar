@@ -1,15 +1,17 @@
 <template>
   <div>
-    <article class="card" v-for="item in items" :key="item.id">
-      <div class="col">
-        <img class="item-image" :src="item.image" :alt="item.name" />
-      </div>
-      <div class="col">
-        <h4 class="item-title">{{item.name}}</h4>
-        <QuantityInput :quantity.sync="item.unit" class="quantity" />
-        <a href="javascript:void(0)" class="item-remove" @click="onRemoveItem(item)">Remove</a>
-      </div>
-    </article>
+    <transition-group name="list">
+      <article class="card" v-for="item in items" :key="item.id">
+        <div class="col">
+          <img class="item-image" :src="item.image" :alt="item.name" />
+        </div>
+        <div class="col">
+          <h4 class="item-title">{{item.name}}</h4>
+          <QuantityInput :quantity.sync="item.unit" class="quantity" />
+          <a href="javascript:void(0)" class="item-remove" @click="onRemoveItem(item)">Remove</a>
+        </div>
+      </article>
+    </transition-group>
   </div>
 </template>
 
@@ -60,5 +62,14 @@ export default {
   text-transform: lowercase;
   letter-spacing: 1px;
   display: block;
+}
+list-enter-active,
+.list-leave-active,
+.list-enter-active {
+  transition: all 1s;
+}
+.list-enter,
+.list-leave-to {
+  opacity: 0;
 }
 </style>

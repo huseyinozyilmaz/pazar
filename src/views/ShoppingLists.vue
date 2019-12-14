@@ -2,12 +2,14 @@
   <div class="shopping-lists">
     <h1>Shopping Lists</h1>
     <div v-if="shoppingListsExist">
-      <ShoppingListsItem
-        v-for="(shoppingList, index) in shoppingLists"
-        :key="shoppingList.id"
-        :shoppingList="shoppingList"
-        :index="index"
-      />
+      <transition-group name="list">
+        <ShoppingListsItem
+          v-for="(shoppingList, index) in shoppingLists"
+          :key="shoppingList.id"
+          :shoppingList="shoppingList"
+          :index="index"
+        />
+      </transition-group>
       <p>
         <button class="btn btn-medium" @click="onCreateList">
           <AddIcon class="icon-small" />
@@ -55,4 +57,13 @@ export default {
 </script>
 
 <style scoped>
+list-enter-active,
+.list-leave-active {
+  transition: all 1s;
+}
+.list-enter,
+.list-leave-to {
+  opacity: 0;
+  /* transform: translateY(30px); */
+}
 </style>

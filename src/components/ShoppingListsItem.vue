@@ -14,7 +14,7 @@
       </a>
       <footer>
         <div class="btn-group">
-          <button class="btn btn-small">
+          <button class="btn btn-small" @click="onDelete">
             <TrashIcon class="icon-small" />
           </button>
           <button class="btn btn-small">
@@ -61,6 +61,9 @@ export default {
     onClick() {
       this.$store.commit("SET_SELECTED_SHOPPING_LIST", this.shoppingList);
       this.$router.push({ name: "cart" });
+    },
+    onDelete() {
+      this.$store.dispatch("deleteShoppingList", this.shoppingList);
     }
   },
   computed: {
