@@ -7,7 +7,7 @@
       <div class="col">
         <h4 class="item-title">{{item.name}}</h4>
         <QuantityInput :quantity.sync="item.unit" class="quantity" />
-        <a href="javascript:void(0)" class="item-remove" @click="onRemoveItem($event, item)">Remove</a>
+        <a href="javascript:void(0)" class="item-remove" @click="onRemoveItem(item)">Remove</a>
       </div>
     </article>
   </div>

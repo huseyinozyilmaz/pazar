@@ -20,8 +20,7 @@ app.get('/api/profile/:profileId/list/:listId', (req, res) => {
 })
 app.put('/api/profile/:profileId/list/:listId', (req, res) => {
   const { profileId, listId } = req.params
-  const { list } = req.body
-  profiles.updateShoppingList(profileId, listId, list)
+  profiles.updateShoppingList(profileId, listId, req.body)
   res.sendStatus(204)
 })
 app.delete('/api/profile/:profileId/list/:listId', (req, res) => {

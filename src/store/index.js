@@ -6,7 +6,7 @@ const K = 'Thsjha6gastsab5asokcyw7a£gskMa0PqgsT'
 
 Vue.use(Vuex)
 
-export default new Vuex.Store({
+const store = new Vuex.Store({
   state: {
     profile: localStorage.getItem('pazar_p') ? JSON.parse(sjcl.decrypt(K, atob(localStorage.getItem('pazar_p')))) : { name: '', email: '', pin: '', contact: { name: '', email: '' } },
     shoppingLists: [],
@@ -26,7 +26,6 @@ export default new Vuex.Store({
       state.shop = shop
     },
     SET_SHOPPING_LISTS(state, list) {
-      console.log('Setting Shopping List')
       state.shoppingLists = list
     },
     SET_SELECTED_SHOPPING_LIST(state, list) {
@@ -65,7 +64,6 @@ export default new Vuex.Store({
     async fetchShoppingLists({ commit, state }) {
       commit('SET_STATUS', 'Loading')
       let { data } = await Axios.get(`/api/profile/${getProfileId(state.profile)}/list`)
-      console.log(data)
       commit('SET_SHOPPING_LISTS', data)
       commit('SET_STATUS', 'Ready')
     },
@@ -73,6 +71,11 @@ export default new Vuex.Store({
       list.profileId = getProfileId(state.profile)
       await Axios.post(`/api/profile/${list.profileId}/list`, list)
       commit('ADD_TO_SHOPPING_LISTS', list)
+    },
+    async updateShoppingList({ commit, state }) {
+      commit('SET_STATUS', 'Loading')
+      await Axios.put(`/api/profile/${state.selectedShoppingList.profileId}/list/${state.selectedShoppingList.id}`, state.selectedShoppingList)
+      commit('SET_STATUS', 'Ready')
     }
   },
   getters: {
@@ -117,3 +120,11 @@ function getProfileId(profile) {
   let profileIdBitArray = sjcl.hash.sha256.hash(profile.email + profile.pin)
   return sjcl.codec.hex.fromBits(profileIdBitArray)
 }
+
+store.subscribe((mutation) => {
+  if (['ADD_TO_CART', 'REMOVE_FROM_CART', 'EMPTY_CART'].includes(mutation.type)) {
+    store.dispatch('updateShoppingList')
+  }
+})
+
+export default store;
