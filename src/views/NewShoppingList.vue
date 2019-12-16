@@ -22,16 +22,19 @@
       <div>
         <label for="list-priority">Priority</label>
         <div id="list-priority">
-          <label class="container">High
-            <input type="radio" value="high" v-model="shoppingList.priority">
+          <label class="container">
+            High
+            <input type="radio" value="high" v-model="shoppingList.priority" />
             <span class="checkmark"></span>
           </label>
-          <label class="container">Medium
-            <input type="radio" value="medium" v-model="shoppingList.priority">
+          <label class="container">
+            Medium
+            <input type="radio" value="medium" v-model="shoppingList.priority" />
             <span class="checkmark"></span>
           </label>
-          <label class="container">Low
-            <input type="radio" value="low" v-model="shoppingList.priority">
+          <label class="container">
+            Low
+            <input type="radio" value="low" v-model="shoppingList.priority" />
             <span class="checkmark"></span>
           </label>
         </div>
@@ -57,28 +60,34 @@ export default {
         date: new Date().toISOString(),
         recipient: "",
         priority: "medium",
+        sent: false,
         items: []
       }
-    }
+    };
   },
   components: {
     Datetime
   },
   methods: {
     onCreateList() {
-      this.shoppingList.id = new Date().getTime()
-      this.$store.dispatch('createShoppingList', this.shoppingList)
-      this.$router.push({ name: 'shopping-lists'})
+      this.shoppingList.id = new Date().getTime();
+      this.$store.dispatch("createShoppingList", this.shoppingList);
+      this.$router.push({ name: "shopping-lists" });
     },
     onCancel() {
-      this.$router.push({ name: 'shopping-lists'})
+      this.$router.push({ name: "shopping-lists" });
     },
     invalid() {
-      return !(this.shoppingList.name && this.shoppingList.date && this.shoppingList.recipient && this.shoppingList.priority)
+      return !(
+        this.shoppingList.name &&
+        this.shoppingList.date &&
+        this.shoppingList.recipient &&
+        this.shoppingList.priority
+      );
     }
   },
-  mounted () {
-    this.shoppingList.recipient = this.$store.getters.profile.contact.name
+  mounted() {
+    this.shoppingList.recipient = this.$store.getters.profile.contact.name;
   }
 };
 </script>
@@ -134,5 +143,4 @@ export default {
 .container input {
   display: block;
 }
-
 </style>

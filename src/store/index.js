@@ -75,9 +75,12 @@ const store = new Vuex.Store({
       await Axios.post(`/api/profile/${list.profileId}/list`, list)
       commit('ADD_TO_SHOPPING_LISTS', list)
     },
-    async deleteShoppingList({ commit }, list) {
+    async deleteShoppingList({ commit, state }, list) {
       await Axios.delete(`/api/profile/${list.profileId}/list/${list.id}`)
       commit('REMOVE_FROM_SHOPPING_LISTS', list)
+      if (list.id === state.selectedShoppingList.id) {
+        commit('SET_SELECTED_SHOPPING_LIST', null)
+      }
     },
     async updateShoppingList({ commit, state }) {
       commit('SET_STATUS', 'Loading')
