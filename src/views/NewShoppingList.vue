@@ -48,13 +48,14 @@
 <script>
 import { Datetime } from "vue-datetime";
 import "vue-datetime/dist/vue-datetime.css";
+import uuid from "uuid";
 
 export default {
   name: "NewShoppingList",
   data() {
     return {
       shoppingList: {
-        id: "",
+        id: uuid.v4(),
         profileId: "",
         name: "For Today",
         date: new Date().toISOString(),
@@ -70,7 +71,6 @@ export default {
   },
   methods: {
     onCreateList() {
-      this.shoppingList.id = new Date().getTime();
       this.$store.dispatch("createShoppingList", this.shoppingList);
       this.$router.push({ name: "shopping-lists" });
     },

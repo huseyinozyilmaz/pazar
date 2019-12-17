@@ -20,18 +20,18 @@ function readShoppingLists(profileId) {
 }
 function readShoppingList(profileId, listId) {
   return db.get('shoppingLists')
-    .find({ profileId: profileId, id: parseInt(listId) })
+    .find({ profileId: profileId, id: listId })
     .value()
 }
 function updateShoppingList(profileId, listId, list) {
   db.get('shoppingLists')
-    .find({ profileId: profileId, id: parseInt(listId) })
+    .find({ profileId: profileId, id: listId })
     .assign({ name: list.name, date: list.date, recipient: list.recipient, priority: list.priority, items: list.items })
     .write()
 }
 function deleteShoppingList(profileId, listId) {
   db.get('shoppingLists')
-    .remove({ profileId: profileId, id: parseInt(listId) })
+    .remove({ profileId: profileId, id: listId })
     .write()
 }
 
