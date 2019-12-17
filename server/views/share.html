@@ -10,10 +10,39 @@
 <body>
   <div id="app" >
     <div v-cloak class="container">
-      <h1 >{{ id }}</h1>
+      <div>
+        <img src="/img/logo.svg" class="app-icon" alt="Pazar Icon" />
+      </div>
+      <div>
+        <img src="/img/pazar.png" alt="Pazar Logo" />
+      </div>
       <div v-if="error">Ooopps... No shopping list found!</div>
       <div v-else>
-        <div v-for="item in shoppingList.items" :key="item">{{item}}</div>
+        <h5 > Hi {{ shoppingList.recipient }}. {{shoppingList.from}} sent you a shopping list.</h5>
+        <h3 class="name">{{shoppingList.name}}</h3>
+        <h5 class="date">{{shoppingList.date | dateformat}}</h5>
+        <h5 class="priority">{{shoppingList.priority}} priority</h5>
+        <div class="list">
+          <article class="item" v-for="item in shoppingList.items" :key="item.id">
+            <div class="col-todo">
+              <label class="box">
+                <input type="checkbox"> 
+                <span class="mark"></span> 
+              </label>
+            </div>
+            <div class="col-image">
+              <img class="item-image" :src="item.image" :alt="item.name" />
+            </div>
+            <div class="col-name">
+              <h4 class="item-title">{{item.name}}</h4>
+              <p class="item-quantity">{{item.unit.value}} {{item.unit.name}}</p>
+            </div>
+          </article>
+        </div>
+        <footer>
+          <button>Done</button>
+          <p>Thank you for completing the shopping. We will let {{shoppingList.from}} know that you found {{resultMessage}} in the shopping list.</p>
+        </footer>
       </div>
     </div>
   </div>
@@ -27,8 +56,13 @@
         shoppingList: { items: []},
         error: false
       },
-      methods: {
-
+      computed: {
+        resultMessage() {
+          return 'most of the items'
+          // 'all the items'
+          // 'at least a few items'
+          // if()
+        }
       },
       created() {
         this.id = window.location.pathname.substring(window.location.pathname.lastIndexOf('/') + 1)
@@ -37,6 +71,14 @@
         }.bind(this)).catch(function (error) {
           this.error = true
         }.bind(this))
+      },
+      filters: {
+        dateformat(value) {
+          if (!value) return "";
+          const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }
+          const date = new Date(value)
+          return date.toLocaleDateString(undefined, options)
+        }
       }
     })
   </script>
@@ -58,6 +100,108 @@
       max-width: 700px;
       margin: 0 auto;
     }
+    .container {
+      padding-top: 40px;
+      max-width: 500px;
+      margin: 0 auto;
+    }
+    .app-icon {
+      width: 10%;
+    }
+    .name {
+      margin-bottom: 0;
+    }
+    .priority, .date{
+      color: #999;
+      font-weight: 400;
+      margin: 0;
+    }
+    .list {
+      margin-top: 6px;
+      border-top: 1px solid #eee;
+    }
+    .item {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .item-image {
+      width: 70px;
+    }
+    .item-title {
+      font-weight: 400;
+      font-size: 1.3rem;
+      color:#000;
+      margin: 0;
+      padding: 0;
+    }
+    .item-quantity {
+      margin: 0;
+      font-size: small;
+    }
+    .col-image {
+      flex: 1;
+    }
+    .col-todo {
+      flex: 1;
+      max-width: 48px;
+      padding: 10px;
+      padding-top: 20px;
+      text-align: center;
+    }
+    .col-name {
+      flex: 5;
+      text-align: left;
+      padding-left: 10px;
+    }
+    .box { 
+      display: block; 
+      position: relative; 
+      padding-left: 35px; 
+      margin-bottom: 15px; 
+      cursor: pointer; 
+      font-size: 20px; 
+    }
+    input[type=checkbox] { visibility: hidden; }
+    .mark { 
+      position: absolute; 
+      top: 0; 
+      left: 0; 
+      height: 25px; 
+      width: 25px; 
+      background-color: #fff;
+      border: 1px solid #aaa;
+      border-radius: 3px;
+    }
+    .box:hover input + .mark { 
+      border-color: tomato;
+    }   
+    .box input:active + .mark { 
+      transform: translateY(2px);
+    } 
+    .box input:checked + .mark { 
+      background-color: tomato;
+      border-color: tomato;
+    } 
+    .mark:after { 
+      content: ""; 
+      position: absolute; 
+      display: none; 
+    } 
+    .box input:checked + .mark:after { 
+      display: block; 
+    }
+    .box .mark:after { 
+      left: 8px; 
+      bottom: 5px; 
+      width: 6px; 
+      height: 14px; 
+      border: solid #eee; 
+      border-width: 0 2px 2px 0; 
+      -webkit-transform: rotate(45deg); 
+      -ms-transform: rotate(45deg); 
+      transform: rotate(45deg); 
+    } 
   </style>
 </body>
 </html>

@@ -47,12 +47,11 @@ app.get('/api/profile/:profileId/list', (req, res) => {
 })
 
 app.get('/api/share/:id', (req, res) => {
-  const sharedShoppingList = profiles.findSharedShoppingList(req.params.id)
+  var sharedShoppingList = profiles.findSharedShoppingList(req.params.id)
   if (sharedShoppingList) {
-    console.log('found')
-    res.json({ id: req.params.id, items: ['a', 'b'] })
+    delete sharedShoppingList.profileId
+    res.json(sharedShoppingList)
   } else {
-    console.log('not found')
     res.status(404).send(new Error('No shopping list found'))
   }
 })

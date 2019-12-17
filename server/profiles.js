@@ -31,7 +31,7 @@ function findSharedShoppingList(listId) {
 function updateShoppingList(profileId, listId, list) {
   db.get('shoppingLists')
     .find({ profileId: profileId, id: listId })
-    .assign({ name: list.name, date: list.date, recipient: list.recipient, priority: list.priority, shared: list.shared, items: list.items })
+    .assign({ name: list.name, date: list.date, recipient: list.recipient, from: list.from, priority: list.priority, shared: list.shared, items: list.items })
     .write()
 }
 function deleteShoppingList(profileId, listId) {

@@ -33,6 +33,7 @@ const store = new Vuex.Store({
     },
     SHARE_SELECTED_SHOPPING_LIST(state) {
       state.selectedShoppingList.shared = true
+      state.selectedShoppingList.from = state.profile.name
     },
     ADD_TO_SHOPPING_LISTS(state, item) {
       state.shoppingLists.push(item)

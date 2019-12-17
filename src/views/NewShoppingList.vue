@@ -60,6 +60,7 @@ export default {
         name: "For Today",
         date: new Date().toISOString(),
         recipient: "",
+        from: "",
         priority: "medium",
         shared: false,
         items: []
