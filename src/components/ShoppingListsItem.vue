@@ -5,7 +5,7 @@
       <dir class="month">{{ shoppingList.date | month }}</dir>
     </div>
     <div class="card" :style="{ backgroundColor: activeColor }">
-      <a href="#" @click="onClick">
+      <a href="#" @click="onClick" :class="{shared: shoppingList.shared}">
         <header>
           <div class="count">{{shoppingList.items.length | cartsize }}</div>
           <div class="priority">{{shoppingList.priority | priority }}</div>
@@ -68,7 +68,11 @@ export default {
   },
   computed: {
     activeColor() {
-      return this.palette[this.index % this.palette.length];
+      if (this.shoppingList.shared) {
+        return '#AAAAAA'
+      } else {
+        return this.palette[this.index % this.palette.length];  
+      }
     }
   }
 };
@@ -144,5 +148,8 @@ export default {
   text-align: right;
   padding-right: 6px;
   flex: 2;
+}
+.shared > * {
+  text-decoration: line-through;
 }
 </style>

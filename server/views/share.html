@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Share</title>
+  <style>[v-cloak] * { display: none; }</style>
+</head>
+<body>
+  <div id="app" >
+    <div v-cloak class="container">
+      <h1 >{{ id }}</h1>
+      <div v-if="error">Ooopps... No shopping list found!</div>
+      <div v-else>
+        <div v-for="item in shoppingList.items" :key="item">{{item}}</div>
+      </div>
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script>
+    const app = new Vue({
+      el: '#app',
+      data: {
+        id: '',
+        shoppingList: { items: []},
+        error: false
+      },
+      methods: {
+
+      },
+      created() {
+        this.id = window.location.pathname.substring(window.location.pathname.lastIndexOf('/') + 1)
+        axios.get('/api/share/' + this.id).then(function (response) {
+          this.shoppingList = response.data
+        }.bind(this)).catch(function (error) {
+          this.error = true
+        }.bind(this))
+      }
+    })
+  </script>
+  <style>
+    *, ::after, ::before {
+      box-sizing: border-box;
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+      font-weight: 300;
+      font-size: 16px;
+      margin: 0;
+    }
+    #app {
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      text-align: center;
+      color: #2c3e50;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+  </style>
+</body>
+</html>

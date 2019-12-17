@@ -26,10 +26,14 @@ export default {
   },
   methods: {
     onEmptyCart() {
-      this.$store.commit("EMPTY_CART");
+      this.$store.commit("EMPTY_CART")
     },
     onSendCart() {
-      
+      this.$store.dispatch('shareShoppingList').then(() => {
+        this.$router.push({ name: 'confirmation', query: { success: true, message: 'Hooray... We sent your shopping list successfully', next: 'shopping-lists' }})
+      }).catch(() => {
+        this.$router.push({ name: 'confirmation', query: { success: false, message: 'Ooopps... Sorry we failed to send your shopping list!', next: 'cart' }})
+      })
     }
   },
   computed: {

@@ -23,10 +23,15 @@ function readShoppingList(profileId, listId) {
     .find({ profileId: profileId, id: listId })
     .value()
 }
+function findSharedShoppingList(listId) {
+  return db.get('shoppingLists')
+    .find({ id: listId, shared: true })
+    .value()
+}
 function updateShoppingList(profileId, listId, list) {
   db.get('shoppingLists')
     .find({ profileId: profileId, id: listId })
-    .assign({ name: list.name, date: list.date, recipient: list.recipient, priority: list.priority, items: list.items })
+    .assign({ name: list.name, date: list.date, recipient: list.recipient, priority: list.priority, shared: list.shared, items: list.items })
     .write()
 }
 function deleteShoppingList(profileId, listId) {
@@ -39,6 +44,7 @@ module.exports = {
   createShoppingList: createShoppingList,
   readShoppingList: readShoppingList,
   readShoppingLists: readShoppingLists,
+  findSharedShoppingList: findSharedShoppingList,
   updateShoppingList: updateShoppingList,
   deleteShoppingList: deleteShoppingList
 }

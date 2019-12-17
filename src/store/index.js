@@ -31,6 +31,9 @@ const store = new Vuex.Store({
     SET_SELECTED_SHOPPING_LIST(state, list) {
       state.selectedShoppingList = list
     },
+    SHARE_SELECTED_SHOPPING_LIST(state) {
+      state.selectedShoppingList.shared = true
+    },
     ADD_TO_SHOPPING_LISTS(state, item) {
       state.shoppingLists.push(item)
     },
@@ -78,7 +81,7 @@ const store = new Vuex.Store({
     async deleteShoppingList({ commit, state }, list) {
       await Axios.delete(`/api/profile/${list.profileId}/list/${list.id}`)
       commit('REMOVE_FROM_SHOPPING_LISTS', list)
-      if (list.id === state.selectedShoppingList.id) {
+      if (state.selectedShoppingList && list.id === state.selectedShoppingList.id) {
         commit('SET_SELECTED_SHOPPING_LIST', null)
       }
     },
@@ -86,6 +89,15 @@ const store = new Vuex.Store({
       commit('SET_STATUS', 'Loading')
       await Axios.put(`/api/profile/${state.selectedShoppingList.profileId}/list/${state.selectedShoppingList.id}`, state.selectedShoppingList)
       commit('SET_STATUS', 'Ready')
+    },
+    shareShoppingList({ commit, state }) {
+      commit('SET_STATUS', 'Loading')
+      commit('SHARE_SELECTED_SHOPPING_LIST')
+      return Axios.put(`/api/profile/${state.selectedShoppingList.profileId}/list/${state.selectedShoppingList.id}`, state.selectedShoppingList).then(()=> {
+        commit('SET_SELECTED_SHOPPING_LIST', null)
+      }).catch (()=> {
+        throw 'Failed to share the list'
+      }).finally (() => commit('SET_STATUS', 'Ready'))
     }
   },
   getters: {

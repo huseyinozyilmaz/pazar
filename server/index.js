@@ -46,6 +46,20 @@ app.get('/api/profile/:profileId/list', (req, res) => {
   res.json(profiles.readShoppingList(profileId))
 })
 
+app.get('/api/share/:id', (req, res) => {
+  const sharedShoppingList = profiles.findSharedShoppingList(req.params.id)
+  if (sharedShoppingList) {
+    console.log('found')
+    res.json({ id: req.params.id, items: ['a', 'b'] })
+  } else {
+    console.log('not found')
+    res.status(404).send(new Error('No shopping list found'))
+  }
+})
+app.get('/share/:id', (req, res) => {
+  res.sendFile('views/share.html', {root: __dirname })
+})
+
 app.get('/api', (req, res) => {
   res.json({ version: 1 })
 })

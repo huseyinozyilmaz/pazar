@@ -61,7 +61,7 @@ export default {
         date: new Date().toISOString(),
         recipient: "",
         priority: "medium",
-        sent: false,
+        shared: false,
         items: []
       }
     };

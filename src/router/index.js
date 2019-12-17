@@ -48,6 +48,11 @@ const routes = [
     path: '/backend',
     name: 'backend',
     component: () => import(/* webpackChunkName: "backend" */ '../views/Backend.vue')
+  },
+  {
+    path: '/confirmation',
+    name: 'confirmation',
+    component: () => import(/* webpackChunkName: "confirmation" */ '../views/Confirmation.vue')
   }
 ]
 

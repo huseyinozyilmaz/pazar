@@ -1,8 +1,8 @@
 <template>
   <div class="cart">
-    <section>
+    <section v-if="selectedShoppingList">
       <CartHeader />
-      <h4 class="cart-name">{{selectedShoppingList.name}}</h4>
+      <h4 class="cart-name">{{ selectedShoppingList.name }}</h4>
       <CartSendHeader :recipient="selectedShoppingList.recipient" />
       <CartItems />
       <CartCustomItem />
