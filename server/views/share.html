@@ -17,6 +17,10 @@
         <img src="/img/pazar.png" alt="Pazar Logo" />
       </div>
       <div v-if="error">Ooopps... No shopping list found!</div>
+      <div v-else-if="showConfirmation" class="confirmation">
+        <p>Thank you for completing the shopping. We will let {{shoppingList.from}} know that you found <strong>{{resultMessage}}</strong> in the shopping list.</p>
+        <p>Have a great day...</p>
+      </div>
       <div v-else>
         <h5 > Hi {{ shoppingList.recipient }}. {{shoppingList.from}} sent you a shopping list.</h5>
         <h3 class="name">{{shoppingList.name}}</h3>
@@ -26,7 +30,7 @@
           <article class="item" v-for="item in shoppingList.items" :key="item.id">
             <div class="col-todo">
               <label class="box">
-                <input type="checkbox"> 
+                <input type="checkbox" v-model="item.completed"> 
                 <span class="mark"></span> 
               </label>
             </div>
@@ -40,8 +44,7 @@
           </article>
         </div>
         <footer>
-          <button>Done</button>
-          <p>Thank you for completing the shopping. We will let {{shoppingList.from}} know that you found {{resultMessage}} in the shopping list.</p>
+          <button class="btn btn-large" @click="onDone">Done</button>
         </footer>
       </div>
     </div>
@@ -54,14 +57,29 @@
       data: {
         id: '',
         shoppingList: { items: []},
-        error: false
+        error: false,
+        showConfirmation: false
       },
       computed: {
         resultMessage() {
-          return 'most of the items'
-          // 'all the items'
-          // 'at least a few items'
-          // if()
+          const total = this.shoppingList.items.length
+          const completed = this.shoppingList.items.reduce((acc, val) => {
+            return val.completed ? acc + 1 : acc;
+          }, 0)
+          if (total === completed) {
+            return 'all the items'
+          } else if (total > 0 && completed === 0) {
+            return 'unfortunately no items'
+          } else if (((completed / total) * 100) >= 50) {
+            return 'most of the items'
+          } else {
+            return 'some of the items'
+          }
+        }
+      },
+      methods: {
+        onDone() {
+          this.showConfirmation = true
         }
       },
       created() {
@@ -201,7 +219,49 @@
       -webkit-transform: rotate(45deg); 
       -ms-transform: rotate(45deg); 
       transform: rotate(45deg); 
-    } 
+    }
+    .btn {
+      border: 1px solid transparent;
+      text-align: center;
+      white-space: nowrap;
+      vertical-align: middle;
+      background-color:white;
+      transition: all 0.2s ease 0s;
+      color: #333;
+      fill: #333;
+      padding: 14px 14px;
+      font-size: 1rem; 
+      border-radius: 50%;
+      outline: none;
+      box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+    }
+    .btn:hover {
+      background-color: tomato;
+      fill: #000;
+    }
+    .btn:active {
+      transform: translateY(2px);
+      fill: #fff;
+      color: #fff;
+    }
+    .btn-large {
+      border-radius: 0.5rem;
+      padding-left: 2rem;
+      padding-right: 2rem;
+      text-transform: uppercase;
+      font-size: .75rem;
+      line-height: 1;
+      letter-spacing: 2px;
+      font-weight: 600;
+      background-color: tomato;
+    }
+    footer {
+      border-top: 1px solid #eee;
+      padding-top: 15px;
+    }
+    .confirmation {
+      padding: 10px;
+    }
   </style>
 </body>
 </html>
