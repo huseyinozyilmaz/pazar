@@ -24,9 +24,11 @@ function readShoppingList(profileId, listId) {
     .value()
 }
 function findSharedShoppingList(listId) {
-  return db.get('shoppingLists')
-    .find({ id: listId, shared: true })
+  const item = db.get('shoppingLists')
+    .find({ id: listId })
     .value()
+  return item.shared ? item : null
+
 }
 function updateShoppingList(profileId, listId, list) {
   db.get('shoppingLists')

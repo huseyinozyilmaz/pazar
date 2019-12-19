@@ -21,6 +21,11 @@ Vue.filter('month', function (value) {
   if (!value) return "";
   return DateTime.fromISO(value).toFormat("LLL");
 })
+Vue.filter('ago', function (value) {
+  if (!value) return "";
+  const past = DateTime.fromISO(value)
+  return past.toRelative();
+})
 Vue.filter('priority', function (value) {
   if (!value) return "";
   return value.charAt(0).toUpperCase()

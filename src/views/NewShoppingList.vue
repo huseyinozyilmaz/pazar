@@ -62,7 +62,7 @@ export default {
         recipient: "",
         from: "",
         priority: "medium",
-        shared: false,
+        shared: null,
         items: []
       }
     };

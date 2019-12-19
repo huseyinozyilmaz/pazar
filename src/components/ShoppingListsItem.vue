@@ -17,10 +17,8 @@
           <button class="btn btn-small" @click="onDelete">
             <TrashIcon class="icon-small" />
           </button>
-          <button class="btn btn-small">
-            <CreateIcon class="icon-small" />
-          </button>
         </div>
+        <div class="shared-date" v-if="shoppingList.shared">Shared {{shoppingList.shared | ago}}</div>
         <div class="recipient">
           <PersonIcon class="icon-small" style="fill: #fff;" />
           {{shoppingList.recipient}}
@@ -32,7 +30,6 @@
 
 <script>
 import PersonIcon from "@/icons/PersonIcon.vue";
-import CreateIcon from "@/icons/CreateIcon.vue";
 import TrashIcon from "@/icons/TrashIcon.vue";
 export default {
   name: "ShoppingListsItem",
@@ -54,13 +51,21 @@ export default {
   },
   components: {
     PersonIcon,
-    CreateIcon,
     TrashIcon
   },
   methods: {
     onClick() {
-      this.$store.commit("SET_SELECTED_SHOPPING_LIST", this.shoppingList);
-      this.$router.push({ name: "cart" });
+      if (this.shoppingList.shared) {
+        const id = this.shoppingList.id;
+        this.$store.commit("SET_SELECTED_SHOPPING_LIST", null);
+        this.$router.push({
+          name: "shared-shopping-list",
+          params: { id: id }
+        });
+      } else {
+        this.$store.commit("SET_SELECTED_SHOPPING_LIST", this.shoppingList);
+        this.$router.push({ name: "cart" });
+      }
     },
     onDelete() {
       this.$store.dispatch("deleteShoppingList", this.shoppingList);
@@ -69,9 +74,9 @@ export default {
   computed: {
     activeColor() {
       if (this.shoppingList.shared) {
-        return '#AAAAAA'
+        return "#AAAAAA";
       } else {
-        return this.palette[this.index % this.palette.length];  
+        return this.palette[this.index % this.palette.length];
       }
     }
   }
@@ -139,15 +144,20 @@ export default {
   justify-content: center;
 }
 .btn-group {
-  flex: 1;
+  flex: 3;
+  text-align: left;
 }
-.btn-group button:first-of-type {
-  margin-right: 10px;
+.btn-group button {
+  margin-left: 6px;
 }
 .recipient {
   text-align: right;
   padding-right: 6px;
+  flex: 3;
+}
+.shared-date {
   flex: 2;
+  text-align: center;
 }
 .shared > * {
   text-decoration: line-through;

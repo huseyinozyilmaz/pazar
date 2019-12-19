@@ -11,6 +11,7 @@ const store = new Vuex.Store({
     profile: localStorage.getItem('pazar_p') ? JSON.parse(sjcl.decrypt(K, atob(localStorage.getItem('pazar_p')))) : { name: '', email: '', pin: '', contact: { name: '', email: '' } },
     shoppingLists: [],
     selectedShoppingList: null,
+    selectedSharedShoppingList: null,
     status: 'Ready',
     shop: {}
   },
@@ -31,8 +32,11 @@ const store = new Vuex.Store({
     SET_SELECTED_SHOPPING_LIST(state, list) {
       state.selectedShoppingList = list
     },
+    SET_SELECTED_SHARED_SHOPPING_LIST(state, list) {
+      state.selectedSharedShoppingList = list
+    },
     SHARE_SELECTED_SHOPPING_LIST(state) {
-      state.selectedShoppingList.shared = true
+      state.selectedShoppingList.shared = new Date().toISOString()
       state.selectedShoppingList.from = state.profile.name
     },
     ADD_TO_SHOPPING_LISTS(state, item) {
@@ -74,6 +78,12 @@ const store = new Vuex.Store({
       commit('SET_SHOPPING_LISTS', data)
       commit('SET_STATUS', 'Ready')
     },
+    async fetchSharedShoppingList({ commit }, id) {
+      commit('SET_STATUS', 'Loading')
+      let { data } = await Axios.get(`/api/share/${id}`)
+      commit('SET_SELECTED_SHARED_SHOPPING_LIST', data)
+      commit('SET_STATUS', 'Ready')
+    },
     async createShoppingList({ commit, state }, list) {
       list.profileId = getProfileId(state.profile)
       await Axios.post(`/api/profile/${list.profileId}/list`, list)
@@ -94,11 +104,11 @@ const store = new Vuex.Store({
     shareShoppingList({ commit, state }) {
       commit('SET_STATUS', 'Loading')
       commit('SHARE_SELECTED_SHOPPING_LIST')
-      return Axios.put(`/api/profile/${state.selectedShoppingList.profileId}/list/${state.selectedShoppingList.id}`, state.selectedShoppingList).then(()=> {
+      return Axios.put(`/api/profile/${state.selectedShoppingList.profileId}/list/${state.selectedShoppingList.id}`, state.selectedShoppingList).then(() => {
         commit('SET_SELECTED_SHOPPING_LIST', null)
-      }).catch (()=> {
+      }).catch(() => {
         throw 'Failed to share the list'
-      }).finally (() => commit('SET_STATUS', 'Ready'))
+      }).finally(() => commit('SET_STATUS', 'Ready'))
     }
   },
   getters: {

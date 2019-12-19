@@ -14,9 +14,6 @@ const routes = [
   {
     path: '/about',
     name: 'about',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
     component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
   },
   {
@@ -27,7 +24,12 @@ const routes = [
   {
     path: '/new-shopping-list',
     name: 'new-shopping-list',
-    component: () => import(/* webpackChunkName: "create-list" */ '../views/NewShoppingList.vue')
+    component: () => import(/* webpackChunkName: "new-shopping-list" */ '../views/NewShoppingList.vue')
+  },
+  {
+    path: '/shared-shopping-list',
+    name: 'shared-shopping-list',
+    component: () => import(/* webpackChunkName: "shared-shopping-list" */ '../views/SharedShoppingList.vue')
   },
   {
     path: '/shop',
@@ -65,7 +67,7 @@ const router = new VueRouter({
 router.beforeEach((to, from, next) => {
   if (to.name === 'home') {
     next()
-  } else if (!store.getters.hasProfile) {
+  } else if (to.name !== 'profile' && !store.getters.hasProfile) {
     next('/profile')
   } else if (!store.getters.hasSelectedShoppingList && to.name === 'cart') {
     next('/shopping-lists')
