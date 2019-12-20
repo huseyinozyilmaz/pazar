@@ -67,7 +67,9 @@ app.get('/api', (req, res) => {
   res.json({ version: 1 })
 })
 
-app.use((req, res) => res.status(404).json({ error: 404 }))
+app.use((req, res) => {
+  res.sendFile('public/index.html', { root: __dirname })
+})
 app.use((req, res) => res.status(500).json({ error: 500 }))
 
 if (process.env.NODE_ENV === 'production') {
