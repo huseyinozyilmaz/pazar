@@ -36,8 +36,8 @@ export default {
 <style scoped>
 .quantity-input {
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
-  width: 150px;
-  max-width: 200px;
+  width: 140px;
+  max-width: 180px;
   border-radius: 1.5rem;
   padding: 8px; 
 }
@@ -58,7 +58,7 @@ export default {
 	fill: tomato;
 }
 .btn-unit {
-  padding: 0 10px;
+  padding: 0 6px;
 }
 .unit-title {
   min-width: 60px;

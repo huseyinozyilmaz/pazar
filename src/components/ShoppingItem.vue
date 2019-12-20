@@ -55,7 +55,7 @@ export default {
   margin-bottom: 10px;
 }
 .shopping-item-header img {
-  width: 140px;
+  width: 75%;
 }
 .shopping-item-title {
   margin: 0;

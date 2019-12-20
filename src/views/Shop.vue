@@ -5,7 +5,6 @@
       <h2>{{selectedCategory.title}}</h2>
     </div>
     <header>
-      <span class="categories">Categories</span>
       <nav class="vertical-align-middle scroll">
         <a href="#" class="nav-item" v-for="c in categories" :key="c.id" @click="onCategoryClick(c)">{{c.title}}</a>
       </nav>
@@ -37,9 +36,6 @@ export default {
   methods: {
     onCategoryClick(category) {
       this.selectedCategory = category 
-    },
-    onItemAddedToCart(item) {
-      console.log(item.name)
     }
   },
   mounted() {
@@ -81,22 +77,8 @@ header {
   margin: 0;
   background: #333;
 }
-header .categories {
-  width: 25%;
-}
 header nav{
-  width: 75%;
-}
-.categories {
-  text-align: center;
-  border-right: 1px solid tomato;
-  padding: 12px 24px 13px;
-}
-.categories {
-  font-weight: 700;
-  color: tomato;
-  text-decoration: none;
-  font-size: small;
+  width: 100%;
 }
 .nav-item {
   padding: 12px 16px 13px;
