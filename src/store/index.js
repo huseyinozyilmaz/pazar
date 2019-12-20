@@ -68,7 +68,7 @@ const store = new Vuex.Store({
     },
     async fetchShop(context) {
       context.commit('SET_STATUS', 'Loading')
-      let { data } = await Axios.get('/json/shop.json')
+      let { data } = await Axios.get('/api/shop')
       context.commit('SET_STATUS', 'Ready')
       context.commit('SET_SHOP', data)
     },

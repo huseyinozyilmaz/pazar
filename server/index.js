@@ -10,8 +10,12 @@ app.use(cors())
 app.use(express.json())
 app.use(express.static(path.join(__dirname, 'public')))
 
-app.get('/api/shop', (req, res) => {
+
+app.get('/api/shop/section', (req, res) => {
   res.json(shop.getSections())
+})
+app.get('/api/shop', (req, res) => {
+  res.json(shop.get())
 })
 
 app.get('/api/profile/:profileId/list/:listId', (req, res) => {
@@ -56,7 +60,7 @@ app.get('/api/share/:id', (req, res) => {
   }
 })
 app.get('/share/:id', (req, res) => {
-  res.sendFile('views/share.html', {root: __dirname })
+  res.sendFile('views/share.html', { root: __dirname })
 })
 
 app.get('/api', (req, res) => {
