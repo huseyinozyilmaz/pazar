@@ -5,6 +5,7 @@
       <PersonIcon class="icon-large" />
     </header>
     <form class="form">
+      <h2 class="section-header">Your details</h2>
       <div>
         <label for="user-name">Your name</label>
         <input
@@ -33,10 +34,8 @@
         />
       </div>
       <section class="contact">
-        <header>
-          <h3 class="title">Contact</h3>
-          <p class="subtitle">Add details of the person you share your shopping lists</p>
-        </header>
+        <h2 class="section-header">Contact details</h2>
+        <p class="subtitle">Add details of the person you share your shopping lists</p>
         <div>
           <label for="user-contact-name">Contact name</label>
           <input
@@ -98,8 +97,22 @@ export default {
 </script>
 
 <style scoped>
+.section-header {
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  text-align: left;
+  color:tomato;
+  padding-bottom: 3px;
+  letter-spacing: 1px;
+  border-bottom: 1px solid rgba(255, 99, 71, 0.2);
+  margin-bottom: 20px 0;
+}
 .passcode {
   text-align: center;
+}
+.contact {
+  margin-top: 50px;
 }
 .contact .title {
   margin-bottom: 0;
@@ -107,5 +120,8 @@ export default {
 }
 .contact .subtitle {
   margin-top: 0;
+  font-size: small;
+  text-align: left;
+  opacity: 0.5;
 }
 </style>

@@ -20,5 +20,16 @@ npm run build
 npm run lint
 ```
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+### Backlog
+- [ ] Automate deployment
+- [ ] Production configuration
+- [ ] Build a shared list page
+- [ ] Send a notification email when a shopping list shared
+- [ ] Send a notification when purchase of shopping list complete
+- [ ] Create a back-end page to manage shop itenary
+- [ ] Create favourite items section based on frequent choices
+- [ ] Search items in the shop
+- [ ] Fix category banners for tablet views
+- [ ] (Optional) Introduce desktop optimised version
+- [ ] Use proper authentication and profile management system
+
