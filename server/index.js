@@ -10,7 +10,6 @@ app.use(cors())
 app.use(express.json())
 app.use(express.static(path.join(__dirname, 'public')))
 
-
 app.get('/api/shop/section', (req, res) => {
   res.json(shop.getSections())
 })
@@ -51,10 +50,11 @@ app.get('/api/profile/:profileId/list', (req, res) => {
 })
 
 app.get('/api/share/:id', (req, res) => {
-  var sharedShoppingList = profiles.findSharedShoppingList(req.params.id)
+  const sharedShoppingList = profiles.findSharedShoppingList(req.params.id)
   if (sharedShoppingList) {
-    delete sharedShoppingList.profileId
-    res.json(sharedShoppingList)
+    let copy = JSON.parse(JSON.stringify(sharedShoppingList))
+    delete copy.profileId
+    res.json(copy)
   } else {
     res.status(404).send(new Error('No shopping list found'))
   }
@@ -67,9 +67,9 @@ app.get('/api', (req, res) => {
   res.json({ version: 1 })
 })
 
-app.use((req, res) => {
-  res.sendFile('public/index.html', { root: __dirname })
-})
+// app.use((req, res) => {
+//   res.sendFile('public/index.html', { root: __dirname })
+// })
 app.use((req, res) => res.status(500).json({ error: 500 }))
 
 if (process.env.NODE_ENV === 'production') {
