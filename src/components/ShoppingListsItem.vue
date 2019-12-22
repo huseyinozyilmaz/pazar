@@ -5,7 +5,7 @@
       <dir class="month">{{ shoppingList.date | month }}</dir>
     </div>
     <div class="card" :style="{ backgroundColor: activeColor }">
-      <a href="JavaScript:Void(0)" @click="onClick" :class="{shared: shoppingList.shared}">
+      <a href="JavaScript:void(0)" @click="onClick" :class="{shared: shoppingList.shared}">
         <header>
           <div class="count">{{shoppingList.items.length | cartsize }}</div>
           <div class="priority">{{shoppingList.priority | priority }}</div>
