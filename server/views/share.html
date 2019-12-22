@@ -14,9 +14,9 @@
         <img src="/img/logo.svg" class="app-icon" alt="Pazar Icon" />
       </div>
       <div>
-        <img src="/img/pazar.png" alt="Pazar Logo" />
+        <img src="/img/logo-m.png" alt="Pazar Logo" />
       </div>
-      <div v-if="error">Ooopps... No shopping list found!</div>
+      <div v-if="error">{{errorMsg}}</div>
       <div v-else-if="showConfirmation" class="confirmation">
         <p>Thank you for completing the shopping. We will let {{shoppingList.from}} know that you found <strong>{{resultMessage}}</strong> in the shopping list.</p>
         <p>Have a great day...</p>
@@ -58,6 +58,7 @@
         id: '',
         shoppingList: { items: []},
         error: false,
+        errorMsg: '',
         showConfirmation: false
       },
       computed: {
@@ -79,7 +80,17 @@
       },
       methods: {
         onDone() {
-          this.showConfirmation = true
+          var completedItems = this.shoppingList.items.filter(function(item) {
+            return item.completed === true
+          }).map(function (item) {
+            return item.id
+          })
+          axios.patch('/api/share/' + this.id, completedItems).then(function (response) {
+            this.showConfirmation = true
+          }.bind(this)).catch(function (error) {
+            this.error = true
+            this.errorMsg = 'Ooopps... Failed to update the shopping list!'
+          }.bind(this))
         }
       },
       created() {
@@ -88,6 +99,7 @@
           this.shoppingList = response.data
         }.bind(this)).catch(function (error) {
           this.error = true
+          this.errorMsg = 'Ooopps... No shopping list found!'
         }.bind(this))
       },
       filters: {

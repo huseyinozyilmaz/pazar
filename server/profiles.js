@@ -37,6 +37,17 @@ function updateShoppingList(profileId, listId, list) {
     .assign({ name: list.name, date: list.date, recipient: list.recipient, from: list.from, priority: list.priority, shared: list.shared, items: list.items })
     .write()
 }
+function updateSharedShoppingList(listId, completedItems) {
+  if (listId && completedItems) {
+    const sharedShoppingList = findSharedShoppingList(listId)
+    if (sharedShoppingList) {
+      for (let i = 0; i < sharedShoppingList.items.length(); i++) {
+        sharedShoppingList.items[i].completed = completedItems.includes(sharedShoppingList.items[i].id)
+      }
+      updateShoppingList(sharedShoppingList.profileId, listId, sharedShoppingList)
+    }
+  }
+}
 function deleteShoppingList(profileId, listId) {
   db.get('shoppingLists')
     .remove({ profileId: profileId, id: listId })
@@ -49,5 +60,6 @@ module.exports = {
   readShoppingLists: readShoppingLists,
   findSharedShoppingList: findSharedShoppingList,
   updateShoppingList: updateShoppingList,
+  updateSharedShoppingList: updateSharedShoppingList,
   deleteShoppingList: deleteShoppingList
 }

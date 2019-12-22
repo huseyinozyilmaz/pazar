@@ -59,6 +59,14 @@ app.get('/api/share/:id', (req, res) => {
     res.status(404).send(new Error('No shopping list found'))
   }
 })
+app.patch('/api/share/:id', (req, res) => {
+  try {
+    profiles.updateSharedShoppingList(req.params.id, req.body)
+    res.sendStatus(204)
+  } catch (error) {
+    res.status(500).send(new Error('Failed to update shared shopping list'))
+  }
+})
 app.get('/share/:id', (req, res) => {
   res.sendFile('views/share.html', { root: __dirname })
 })

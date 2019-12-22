@@ -1,5 +1,5 @@
 <template>
-  <div class="posted-shopping-list">
+  <div class="posted-shopping-list" v-if="shoppingList">
     <div>
       <img src="/img/logo.svg" class="app-icon" alt="Pazar Icon" />
     </div>
