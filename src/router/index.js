@@ -27,9 +27,9 @@ const routes = [
     component: () => import(/* webpackChunkName: "new-shopping-list" */ '../views/NewShoppingList.vue')
   },
   {
-    path: '/shared-shopping-list',
-    name: 'shared-shopping-list',
-    component: () => import(/* webpackChunkName: "shared-shopping-list" */ '../views/SharedShoppingList.vue')
+    path: '/posted-shopping-list',
+    name: 'posted-shopping-list',
+    component: () => import(/* webpackChunkName: "posted-shopping-list" */ '../views/PostedShoppingList.vue')
   },
   {
     path: '/shop',

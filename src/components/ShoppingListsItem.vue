@@ -5,7 +5,7 @@
       <dir class="month">{{ shoppingList.date | month }}</dir>
     </div>
     <div class="card" :style="{ backgroundColor: activeColor }">
-      <a href="#" @click="onClick" :class="{shared: shoppingList.shared}">
+      <a href="JavaScript:Void(0)" @click="onClick" :class="{shared: shoppingList.shared}">
         <header>
           <div class="count">{{shoppingList.items.length | cartsize }}</div>
           <div class="priority">{{shoppingList.priority | priority }}</div>
@@ -59,7 +59,7 @@ export default {
         const id = this.shoppingList.id;
         this.$store.commit("SET_SELECTED_SHOPPING_LIST", null);
         this.$router.push({
-          name: "shared-shopping-list",
+          name: "posted-shopping-list",
           params: { id: id }
         });
       } else {

@@ -1,8 +1,5 @@
 <template>
   <div id="app">
-    <!-- <div id="nav" v-if="!isSignedIn">
-      <button class="btn" @click="onBackClicked"><ArrowBackIcon/></button>
-    </div> -->
     <section class="pages">
       <router-view/>
     </section>
@@ -11,12 +8,9 @@
 </template>
 
 <script>
-// import ArrowBackIcon from "@/icons/ArrowBackIcon.vue"
 import AppFooter from "@/components/AppFooter.vue"
-
 export default {
   components: {
-    // ArrowBackIcon,
     AppFooter
   },
   methods: {
@@ -36,8 +30,6 @@ export default {
 </script>
 
 <style>
-
-
 #nav {
   padding: 10px;
   text-align: left

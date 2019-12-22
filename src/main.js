@@ -26,6 +26,12 @@ Vue.filter('ago', function (value) {
   const past = DateTime.fromISO(value)
   return past.toRelative();
 })
+Vue.filter('dateformat', function(value) {
+  if (!value) return "";
+  const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }
+  const date = new Date(value)
+  return date.toLocaleDateString(undefined, options)
+})
 Vue.filter('priority', function (value) {
   if (!value) return "";
   return value.charAt(0).toUpperCase()

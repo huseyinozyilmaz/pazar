@@ -14,9 +14,10 @@ function createShoppingList(list) {
     .write()
 }
 function readShoppingLists(profileId) {
-  return db.get('shoppingLists')
+  const lists = db.get('shoppingLists')
     .filter({ profileId: profileId })
     .value()
+  return lists
 }
 function readShoppingList(profileId, listId) {
   return db.get('shoppingLists')
@@ -27,7 +28,7 @@ function findSharedShoppingList(listId) {
   const item = db.get('shoppingLists')
     .find({ id: listId })
     .value()
-  return item.shared ? item : null
+  return (item && item.shared) ? item : null
 
 }
 function updateShoppingList(profileId, listId, list) {

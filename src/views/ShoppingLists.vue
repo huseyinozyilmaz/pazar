@@ -64,6 +64,5 @@ list-enter-active,
 .list-enter,
 .list-leave-to {
   opacity: 0;
-  /* transform: translateY(30px); */
 }
 </style>
