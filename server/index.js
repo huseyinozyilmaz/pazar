@@ -4,6 +4,7 @@ const path = require('path')
 const port = process.env.PORT || 8081
 const shop = require('./shop')
 const profiles = require('./profiles')
+const mail = require('./mail')
 
 const app = express()
 app.use(cors())
@@ -40,6 +41,7 @@ app.post('/api/profile/:profileId/list', (req, res) => {
   res.sendStatus(201)
 })
 
+
 app.get('/api/profile/:id', (req, res) => {
   res.json({ id: req.params.id })
 })
@@ -57,6 +59,16 @@ app.get('/api/share/:id', (req, res) => {
     res.json(copy)
   } else {
     res.status(404).send(new Error('No shopping list found'))
+  }
+})
+app.post('/api/share/profile/:profileId/list/:listId', (req, res) => {
+  try {
+    const { profileId, listId } = req.params
+    profiles.updateShoppingList(profileId, listId, req.body)
+    //mail.sendNewShoppingListNotification()
+    res.sendStatus(201)
+  } catch (error) {
+    res.status(500).send(new Error('Failed to share a shopping list'))
   }
 })
 app.patch('/api/share/:id', (req, res) => {

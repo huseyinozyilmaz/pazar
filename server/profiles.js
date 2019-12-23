@@ -41,7 +41,7 @@ function updateSharedShoppingList(listId, completedItems) {
   if (listId && completedItems) {
     const sharedShoppingList = findSharedShoppingList(listId)
     if (sharedShoppingList) {
-      for (let i = 0; i < sharedShoppingList.items.length(); i++) {
+      for (let i = 0; i < sharedShoppingList.items.length; i++) {
         sharedShoppingList.items[i].completed = completedItems.includes(sharedShoppingList.items[i].id)
       }
       updateShoppingList(sharedShoppingList.profileId, listId, sharedShoppingList)

@@ -104,7 +104,7 @@ const store = new Vuex.Store({
     shareShoppingList({ commit, state }) {
       commit('SET_STATUS', 'Loading')
       commit('SHARE_SELECTED_SHOPPING_LIST')
-      return Axios.put(`/api/profile/${state.selectedShoppingList.profileId}/list/${state.selectedShoppingList.id}`, state.selectedShoppingList).then(() => {
+      return Axios.post(`/api/share/profile/${state.selectedShoppingList.profileId}/list/${state.selectedShoppingList.id}`, state.selectedShoppingList).then(() => {
         commit('SET_SELECTED_SHOPPING_LIST', null)
       }).catch(() => {
         throw 'Failed to share the list'

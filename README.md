@@ -15,6 +15,16 @@ npm run serve
 npm run build
 ```
 
+### Run server in local development
+```
+nodemon --exec babel-node -r node_modules/dotenv/config index.js
+```
+
+### Run server in production
+```
+cross-env NODE_ENV=production node -r dotenv/config index.js
+```
+
 ### Lints and fixes files
 ```
 npm run lint
